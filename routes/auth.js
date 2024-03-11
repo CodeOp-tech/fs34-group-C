@@ -3,9 +3,9 @@ var router = express.Router();
 const Sequelize = require("sequelize");
 require("dotenv").config();
 
-/* GET home page. */
+/* GET users listing. */
 router.get("/", function (req, res, next) {
-  res.send({ title: "Express" });
+  res.send("respond with a resource");
 });
 
 module.exports = router;
