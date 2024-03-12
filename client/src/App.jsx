@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
@@ -15,6 +15,39 @@ import Chatbox from "./pages/Chatbox";
 function App() {
   return (
     <>
+      <ul className="nav" col-6>
+        <li className="nav-item">
+          <Link className="nav-link active" aria-current="page" href="#" to="/">
+            Home
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            className="nav-link active"
+            aria-current="page"
+            href="#"
+            to="/About"
+          >
+            About
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" href="#" to="/Jobs">
+            Marketplace
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" href="#" to="/Request">
+            New Request
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" href="#" to="/Profile">
+            My Profile
+          </Link>
+        </li>
+      </ul>
+
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/About" element={<About />}></Route>

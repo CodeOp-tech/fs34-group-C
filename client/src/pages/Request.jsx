@@ -15,8 +15,6 @@ export default function Request() {
     event.preventDefault();
     let { name, value } = event.target;
     setRequest((state) => ({ ...state, [name]: value }));
-    // console.log(name, value);
-    // console.log(event.target);
   }
 
   function handleSubmit(event) {
@@ -24,21 +22,32 @@ export default function Request() {
     sendRequest();
   }
 
-  function sendRequest() {
+  async function sendRequest() {
     // POST request into database
     console.log("hello");
+
+    try {
+      const response = await fetch(`/api/service`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(request),
+      });
+      console.log("New job request was submitted!");
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   function setCategory(event) {
-    event.preventDefault();
-    // if (event.target.id === "categoryOne") {
-    //   setRequest((request.category_id = 1));
-    // } else if (event.target.id === "categoryTwo") {
-    //   setRequest((request.category_id = 2));
-    // } else {
-    //   setRequest((request.category_id = 3));
-    // }
-    // console.log(request.category_id);
+    if (event.target.id === "categoryOne") {
+      setRequest((state) => ({ ...state, category_id: 1 }));
+    } else if (event.target.id === "categoryTwo") {
+      setRequest((state) => ({ ...state, category_id: 2 }));
+    } else {
+      setRequest((state) => ({ ...state, category_id: 3 }));
+    }
   }
 
   return (
@@ -95,13 +104,14 @@ export default function Request() {
 
           <div>
             <div htmlFor="category_id">Job category: </div>
-            <form onChange={handleChange}>
+
+            <form>
               <input
                 type="radio"
                 name="category_id"
                 id="categoryOne"
                 value={request.category_id}
-                // onClick={setCategory}
+                onClick={setCategory}
               />
               <label htmlFor="categoryOne">Category 1</label> <br />
               <input
@@ -109,7 +119,7 @@ export default function Request() {
                 name="category_id"
                 id="categoryTwo"
                 value={request.category_id}
-                // onClick={setCategory}
+                onClick={setCategory}
               ></input>
               <label htmlFor="categoryTwo">Category 2</label>
               <br />
@@ -119,12 +129,12 @@ export default function Request() {
           <input type="submit" value="Submit" />
         </form>
       </div>
-      <div> {request.service_name}</div>
+      {/* <div> {request.service_name}</div>
       <div> {request.service_description}</div>
       <div> {request.date}</div>
       <div> {request.time_required}</div>
       <div> {request.points}</div>
-      <div> {request.category_id}</div>
+      <div> {request.category_id}</div> */}
     </>
   );
 }

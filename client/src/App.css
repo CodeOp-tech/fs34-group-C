@@ -1,3 +1,6 @@
+body {
+  background-color: #fff5cb;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +42,10 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.home-img {
+  border-radius: 10%;
+  border: 2px solid black;
+  padding: 0px;
 }
