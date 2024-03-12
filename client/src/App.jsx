@@ -1,9 +1,9 @@
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import Registration from "./pages/Registration";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Request from "./pages/Request";
@@ -11,21 +11,23 @@ import Jobs from "./pages/Jobs";
 import Details from "./pages/Details";
 import Categories from "./pages/Categories";
 import Chatbox from "./pages/Chatbox";
+import Page404 from "./pages/Page404";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/About" element={<About />}></Route>
-        <Route path="/Login" element={<Login />}></Route>
-        <Route path="/Registration" element={<Registration />}></Route>
-        <Route path="/Profile" element={<Profile />}></Route>
-        <Route path="/Request" element={<Request />}></Route>
-        <Route path="/Jobs" element={<Jobs />}></Route>
-        <Route path="/Details" element={<Details />}></Route>
-        <Route path="/Categories" element={<Categories />}></Route>
-        <Route path="/Chatbox" element={<Chatbox />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/request" element={<Request />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/chatbox" element={<Chatbox />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </>
   );
