@@ -10,16 +10,29 @@ router.get("/", function (req, res, next) {
   res.send({ title: "Express" });
 });
 
+//Alys: get user information by id (for dashboard)
+router.get("/:id", async function (req, res, next) { 
+  const { id } = req.params;
 
-// Get all the services - do we use this same endpoint and then map throguh different 
+  try {
+  const user = await models.User.findByPk(id);
+  res.send(user);
+  
+  } catch (error) {
+    res.status(500).send(error);
+  }
+  });
+
+// Alys WORK ON THIS IT DOESN'T WORK YET: Get all the services - do we use this same endpoint and then map throguh different 
 
 router.get("/myservices", async function (req, res, next) { 
-const user = await models.User.findOne({
+  try {
+  const user = await models.User.findOne({
   where: {
     id,
   },
 });
-try {
+
 const servicesCreated = await user.getServices();
 res.send(servicesCreated);
 
