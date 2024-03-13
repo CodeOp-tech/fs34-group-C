@@ -23,19 +23,34 @@ router.get("/:id", async function (req, res, next) {
   }
   });
 
-// Alys WORK ON THIS IT DOESN'T WORK YET: Get all the services - do we use this same endpoint and then map throguh different 
+// Alys WORK ON THIS IT DOESN'T WORK YET: Get all the services - do we use this same endpoint and then map through them to show different keys
 
 router.get("/myservices", async function (req, res, next) { 
+  const { id } = req;
   try {
-  const user = await models.User.findOne({
-  where: {
-    id,
-  },
+    models.User.findOne({
+      where: {
+        id,
+      },
+      include: models.Service,
+    });
+
+} catch (error) {
+  res.status(500).send(error);
+}
 });
 
-const servicesCreated = await user.getServices();
-res.send(servicesCreated);
+//Alys: add a new catagory/ user relationship - test this 
 
+router.put("usercategories", async function (req, res){
+  try {
+  const category = await models.Category.findOne({
+    where: {
+      id,
+    },
+  });
+  
+  const data = await category.addUsers(users);
 } catch (error) {
   res.status(500).send(error);
 }
