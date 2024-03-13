@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import About from "./pages/About";
 import Login from "./pages/Login";
@@ -12,11 +12,13 @@ import Details from "./pages/Details";
 import Categories from "./pages/Categories";
 import Chatbox from "./pages/Chatbox";
 import Page404 from "./pages/Page404";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <>
-   <Routes>
+    <div>
+      <NavBar />
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
@@ -29,7 +31,7 @@ function App() {
         <Route path="/chatbox" element={<Chatbox />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
