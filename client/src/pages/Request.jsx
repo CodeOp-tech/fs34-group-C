@@ -13,20 +13,21 @@ export default function Request() {
     category_id: 0,
   });
 
+  // When the input in the form changes, my state is updated
   function handleChange(event) {
     let { name, value } = event.target;
-    console.log(name, value);
     setRequest((state) => ({ ...state, [name]: value }));
   }
 
+  // When the form is submitted, the function to send the request to the backend gets called
   function handleSubmit(event) {
     event.preventDefault();
     sendRequest();
   }
 
+  // SEND my request to the backend
   async function sendRequest() {
     // POST request into database
-    // console.log("hello");
     try {
       const response = await fetch(`/api/service`, {
         method: "POST",
@@ -41,101 +42,11 @@ export default function Request() {
     }
   }
 
-  function setCategory(event) {
-    console.log(event);
-    if (event.target.id === "1") {
-      setRequest((state) => ({ ...state, category_id: 1 }));
-    } else if (event.target.id === "2") {
-      setRequest((state) => ({ ...state, category_id: 2 }));
-    } else if (event.target.id === "3") {
-      setRequest((state) => ({ ...state, category_id: 3 }));
-    } else {
-      setRequest((state) => ({ ...state, category_id: 4 }));
-    }
-  }
+  //
 
   return (
     <>
       <div>Make a new job request</div>
-      <div>
-        {/* <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="service_name">Job name: </label>
-            <input
-              type="text"
-              name="service_name"
-              value={request.service_name}
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="service_description">Job description: </label>
-            <input
-              type="text"
-              name="service_description"
-              value={request.service_description}
-              onChange={handleChange}
-            ></input>
-          </div> 
-           <div>
-            <label htmlFor="date">Date of fulfillment: </label>
-            <input
-              type="date"
-              name="date"
-              value={request.date}
-              onChange={handleChange}
-            ></input>
-          </div> 
-          <div>
-            <label htmlFor="time_required">Duration (in hours): </label>
-            <input
-              type="number"
-              name="time_required"
-              value={request.time_required}
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="points">Points: </label>
-            <input
-              type="number"
-              name="points"
-              min="1"
-              value={request.points}
-              onChange={handleChange}
-            ></input>
-          </div>
-
-          <div>
-            <div htmlFor="category_id">Job category: </div>
-            <input
-              type="radio"
-              name="category_id"
-              id="categoryOne"
-              value={request.category_id}
-              onClick={setCategory}
-            />
-            <label htmlFor="categoryOne">Category 1</label> <br />
-            <input
-              type="radio"
-              name="category_id"
-              id="categoryTwo"
-              value={request.category_id}
-              onClick={setCategory}
-            ></input>
-            <label htmlFor="categoryTwo">Category 2</label>
-            <br />
-          </div>
-
-          <input type="submit" value="Submit" />
-        </form> */}
-      </div>
-      <div> {request.service_name}</div>
-      <div> {request.service_description}</div>
-      <div> {request.date}</div>
-      <div> {request.time_required}</div>
-      <div> {request.points}</div>
-      <div> {request.category_id}</div>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -204,7 +115,7 @@ export default function Request() {
             Tech assistance
           </option>
         </Form.Select>
-        <Button variant="primary" type="submit">
+        <Button className="button m-2" type="submit">
           Submit
         </Button>
       </Form>
