@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Row, Col, Container, Form, Button } from "react-bootstrap";
 
 function Login() {
   const [credentials, setCredentials] = useState({
@@ -28,42 +29,38 @@ function Login() {
   };
   return (
     <div>
-      <div>
-        <input
-          value={email}
-          onChange={handleChange}
-          name="email"
-          type="email"
-          className="form-control mb-2"
-        />
-        <input
-          value={password}
-          onChange={handleChange}
-          name="password"
-          type="password"
-          className="form-control mb-2"
-        />
-        <div className="d-flex gap-2 justify-content-center">
-          <button className="btn btn-primary" onClick={login}>
+      <Container>
+        <Form>
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm="2">
+              Email
+            </Form.Label>
+            <Form.Control
+              value={email}
+              onChange={handleChange}
+              name="email"
+              type="email"
+            />
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm="2">
+              Password
+            </Form.Label>
+            <Form.Control
+              value={password}
+              onChange={handleChange}
+              name="password"
+              type="password"
+            />
+          </Form.Group>
+          <Button variant="primary" onClick={login}>
             Log in
-          </button>
+          </Button>
+        </Form>
+        <div className="mt-4">
+          Not registered yet? Click here to <Link to="/register">Register</Link>
         </div>
-      </div>
-      <div className="mt-2">
-        Not registered yet? Click here to <Link to="/register">Register</Link>
-      </div>
-      {/* {isLoggedIn ? (
-        <div className="text-center p-4">
-          <div className="alert">You are logged in</div>
-        </div>
-      ) : (
-        <div className="text-center p-4">
-          <div className="mt-2">
-            Not registered yet? Click here to{" "}
-            <Link to="/register">Register</Link>
-          </div>
-        </div>
-      )} */}
+      </Container>
     </div>
   );
 }

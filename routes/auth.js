@@ -1,9 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
-// var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 var models = require("../models");
-const Sequelize = require("sequelize");
 require("dotenv").config();
 var bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -19,6 +17,7 @@ router.post("/register", async (req, res) => {
       password: hash,
       firstname: firstname,
       lastname: lastname,
+      total_points: 100,
     });
     res.send({ message: "Register successful" });
   } catch (err) {
