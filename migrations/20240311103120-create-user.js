@@ -21,7 +21,9 @@ module.exports = {
       lastname: {
         type: Sequelize.STRING,
       },
-
+      total_points: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
