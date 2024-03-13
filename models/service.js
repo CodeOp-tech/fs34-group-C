@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "service_creator",
         as: "creator",
       });
+      Service.belongsTo(models.Category);
     }
   }
   Service.init(
