@@ -6,6 +6,7 @@ const cors = require("cors"); // add at the top
 
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
+var profileRouter = require("./routes/profile");
 
 var app = express();
 
@@ -18,5 +19,6 @@ app.use(cors()); // add after 'app' is created
 
 app.use("/api", indexRouter);
 app.use("/api/auth", authRouter);
+app.use("api/profile", profileRouter);
 
 module.exports = app;
