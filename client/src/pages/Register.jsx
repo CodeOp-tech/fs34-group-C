@@ -79,7 +79,7 @@ export default function Register() {
               />
             </Form.Group>
           </Row>
-          <Button variant="primary" type="submit">
+          <Button className="button" type="submit">
             Register
           </Button>
         </Form>
