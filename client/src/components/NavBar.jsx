@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import useAuth from "../hooks/useAuth";
+import {
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  Row,
+  Col,
+  Button,
+} from "react-bootstrap";
 
 export default function NavBar() {
+  const { isLoggedIn, signIn, signOut } = useAuth();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    signOut();
+  };
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary mb-4">
@@ -28,20 +37,20 @@ export default function NavBar() {
               <Nav.Link as={Link} to="/request">
                 Request
               </Nav.Link>
-              <NavDropdown title="Hello User!" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/profile">
-                  Profile
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/login">
-                  Login
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/register">
-                  Register
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item as={Link} to="/">
-                  Log out
-                </NavDropdown.Item>
+              <NavDropdown title="My Account" id="basic-nav-dropdown">
+                {!isLoggedIn && (
+                  <NavDropdown.Item as={Link} to="/login">
+                    Login
+                  </NavDropdown.Item>
+                )}
+                {isLoggedIn && (
+                  <NavDropdown.Item as={Link} to="/profile">
+                    Profile
+                  </NavDropdown.Item>
+                )}
+                {isLoggedIn && (
+                  <NavDropdown.Item onClick={logout}>Log out</NavDropdown.Item>
+                )}
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

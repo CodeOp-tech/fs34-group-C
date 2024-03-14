@@ -2,14 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
+import useAuth from "../hooks/useAuth";
 
 function Login() {
+  const { isLoggedIn, signIn } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
   const { email, password } = credentials;
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
@@ -22,7 +23,7 @@ function Login() {
         data: credentials,
       });
       localStorage.setItem("token", data.token);
-      alert("Logged in");
+      signIn();
     } catch (error) {
       console.log(error);
     }
@@ -53,13 +54,22 @@ function Login() {
               type="password"
             />
           </Form.Group>
-          <Button variant="primary" onClick={login}>
+          <Button className="button" onClick={login}>
             Log in
           </Button>
         </Form>
-        <div className="mt-4">
-          Not registered yet? Click here to <Link to="/register">Register</Link>
-        </div>
+        {isLoggedIn ? (
+          <div className="text-center p-4">
+            <div className="alert">You are logged in</div>
+          </div>
+        ) : (
+          <div className="text-center p-4">
+            <div className="mt-2">
+              Not registered yet? Click here to{" "}
+              <Link to="/register">Register</Link>
+            </div>
+          </div>
+        )}
       </Container>
     </div>
   );
