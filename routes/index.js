@@ -48,8 +48,10 @@ router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
     // res.send({ title: "Express" });
   } catch (err) {
     res.status(500).send(err);
+  }
+});
 
-    // Ari GET categories, select * from categories
+// Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {
   try {
     const response = await models.Category.findAll();
