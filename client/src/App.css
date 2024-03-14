@@ -57,3 +57,34 @@ body {
   max-height: 120px;
   border: 1px solid rgb(115, 113, 113);
 }
+
+.profile {
+  background-color: rgb(226, 242, 243);
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+.profile-container {
+  color: rgb(0, 62, 69);
+  border-radius: 40px;
+  border: 1px solid rgb(1, 58, 100);
+  padding: 16px;
+  margin: 15px;
+}
+
+.profile-button {
+  background-color: rgb(217, 240, 247);
+  color: rgb(1, 58, 100);
+  border-radius: 20px;
+  padding: 9px 30px;
+  border: 1.9px solid rgb(1, 58, 100);
+}
+
+.image-container { 
+  background-color: rgb(1, 37, 63);
+  border-radius: 20px;
+  max-height: 20px;
+  max-width: 20px;
+  padding: 30px 30px;
+  border: 1.9px solid rgb(1, 58, 100);
+}

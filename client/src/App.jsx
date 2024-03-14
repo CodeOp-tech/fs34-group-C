@@ -13,25 +13,87 @@ import Categories from "./pages/Categories";
 import Chatbox from "./pages/Chatbox";
 import Page404 from "./pages/Page404";
 import NavBar from "./components/NavBar";
+import AuthContext from "./contexts/AuthContext";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  function signIn() {
+    setIsLoggedIn(true);
+  }
+
+  function signOut() {
+    setIsLoggedIn(false);
+  }
+
+  const authObject = {
+    isLoggedIn,
+    signIn,
+    signOut,
+  };
   return (
-    <div>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/request" element={<Request />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/details" element={<Details />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/chatbox" element={<Chatbox />} />
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-    </div>
+    <AuthContext.Provider value={authObject}>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/request"
+            element={
+              <RequireAuth>
+                <Request />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/jobs"
+            element={
+              <RequireAuth>
+                <Jobs />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/details"
+            element={
+              <RequireAuth>
+                <Details />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/categories"
+            element={
+              <RequireAuth>
+                <Categories />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/chatbox"
+            element={
+              <RequireAuth>
+                <Chatbox />
+              </RequireAuth>
+            }
+          />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </div>
+    </AuthContext.Provider>
   );
 }
 
