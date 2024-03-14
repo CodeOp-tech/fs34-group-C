@@ -80,11 +80,19 @@ body {
   border: 1.9px solid rgb(1, 58, 100);
 }
 
+.profile-title {
+  color: rgb(0, 62, 69);
+}
+
 .image-container { 
   background-color: rgb(1, 37, 63);
   border-radius: 20px;
-  max-height: 20px;
-  max-width: 20px;
-  padding: 30px 30px;
+  max-height: 30px;
+  width: 100%;
+  max-width: 30px;
+  margin: 0 auto;
+  padding: 50px 50px;
   border: 1.9px solid rgb(1, 58, 100);
+  justify-content: center;
+  display: flex;
 }

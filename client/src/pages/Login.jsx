@@ -23,6 +23,7 @@ function Login() {
         data: credentials,
       });
       localStorage.setItem("token", data.token);
+      console.log(data.message, data.token);
       signIn();
     } catch (error) {
       console.log(error);
