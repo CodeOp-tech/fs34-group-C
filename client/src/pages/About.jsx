@@ -11,7 +11,7 @@ export default function About() {
             Welcome to TimeShare THIS IS OBVIOUSLY JUST SOME TEST TEXT
           </Card.Body>
 
-          <Card.Body className="col-6">
+          <Card.Body className="col-6 border border-dark" >
             <strong>TimeShare</strong> is all about matching demand & supply -
             but make it more social, communial and heart-to-heart. This website
             was built to create anyone access to help in daily life matters, be
