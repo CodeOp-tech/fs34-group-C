@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
     });
     res.send({ message: "Register successful" });
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
       throw new Error("User does not exist");
     }
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
