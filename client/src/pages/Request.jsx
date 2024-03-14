@@ -46,79 +46,80 @@ export default function Request() {
 
   return (
     <>
-      <div>Make a new job request</div>
+      <div className="m-5">
+        Make a new job request
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Job name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder=""
+              name="service_name"
+              value={request.service_name}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Job description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="service_description"
+              value={request.service_description}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Date of fulfillment:</Form.Label>
+            <Form.Control
+              type="date"
+              name="date"
+              value={request.date}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Job name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder=""
-            name="service_name"
-            value={request.service_name}
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Duration (in hours):</Form.Label>
+            <Form.Control
+              type="number"
+              name="time_required"
+              value={request.time_required}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Points:</Form.Label>
+            <Form.Control
+              type="number"
+              name="points"
+              min="1"
+              value={request.points}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Select
+            aria-label="Categories"
+            name="category_id"
             onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Job description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            name="service_description"
-            value={request.service_description}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Date of fulfillment:</Form.Label>
-          <Form.Control
-            type="date"
-            name="date"
-            value={request.date}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Duration (in hours):</Form.Label>
-          <Form.Control
-            type="number"
-            name="time_required"
-            value={request.time_required}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Points:</Form.Label>
-          <Form.Control
-            type="number"
-            name="points"
-            min="1"
-            value={request.points}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Select
-          aria-label="Categories"
-          name="category_id"
-          onChange={handleChange}
-          value={request.category_id}
-        >
-          <option>Choose job category</option>
-          <option type="radio" value="1">
-            Household
-          </option>
-          <option type="radio" value="2">
-            Social
-          </option>
-          <option type="radio" value="3">
-            Tech assistance
-          </option>
-        </Form.Select>
-        <Button className="button m-2" type="submit">
-          Submit
-        </Button>
-      </Form>
+            value={request.category_id}
+          >
+            <option>Choose job category</option>
+            <option type="radio" value="1">
+              Household
+            </option>
+            <option type="radio" value="2">
+              Social
+            </option>
+            <option type="radio" value="3">
+              Tech assistance
+            </option>
+          </Form.Select>
+          <Button className="button m-2" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </div>
     </>
   );
 }
