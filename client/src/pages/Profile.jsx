@@ -10,7 +10,7 @@ export default function Profile() {
   async function getUserInfo () {
     console.log("this function call works")
     try {
-      const response = await fetch("api/:id", {
+      const response = await fetch("api/profile", {
         method: "GET",
         headers: {"authorization": "Bearer " + localStorage.getItem("token")
       },
@@ -36,11 +36,11 @@ export default function Profile() {
         <Col>
         <h3>Profile information</h3>
         <div>This is my information</div>
-        {userInfo.map((user) => (
+        {/* {userInfo.map((user) => (
           <div key={user.id}>
             <p>{user.firstname}</p>         
             </div>
-        ))}
+        ))} */}
         <button>Update Categories</button>
         </Col>
  

@@ -10,11 +10,12 @@ router.get("/", function (req, res, next) {
   res.send({ title: "Express" });
 });
 
-//Alys: get user information by id (for dashboard)
-router.get("/:id", async function (req, res, next) {
-  const { id } = req.params;
+//Alys: get user information by id (for dashboard) - need to test with log in (before was :id)
+router.get("/profile", userShouldBeLoggedIn, async function (req, res, next) {
+  const { id } = req;
 
   try {
+    //find the user using the primary key
     const user = await models.User.findByPk(id);
     res.send(user);
   } catch (error) {
@@ -23,17 +24,21 @@ router.get("/:id", async function (req, res, next) {
 });
 
 
-// Alys WORK ON THIS IT DOESN'T WORK YET: Get all the services - do we use this same endpoint and then map through them to show different keys
+// Alys - get all services for one user
+//question to self: shall we use this same endpoint and then map through them to show different keys - possibly yes
 
-router.get("/myservices", async function (req, res, next) { 
+router.get("/myservices", userShouldBeLoggedIn, async function (req, res) { 
   const { id } = req;
   try {
     models.User.findOne({
       where: {
         id,
       },
-      include: models.Service,
     });
+
+    const services = await user.getServices();
+    res.send(services)
+  
 
 } catch (error) {
   res.status(500).send(error);
@@ -42,15 +47,23 @@ router.get("/myservices", async function (req, res, next) {
 
 //Alys: add a new catagory/ user relationship - test this 
 
-router.put("usercategories", async function (req, res){
+router.post("categories", userShouldBeLoggedIn, async function (req, res){
+  const { id } = req;
+  const { categories } = req.body; //want to make this a list so it can be a drop down 
   try {
-  const category = await models.Category.findOne({
+  const user = await models.User.findOne({
     where: {
       id,
     },
   });
   
-  const data = await category.addUsers(users);
+  // const category = await models.Category.findOne({
+  //   where: {
+  //     id: categories,
+  //   },
+  // });
+  await user.addCategory(categories);
+  res.send(user);
 } catch (error) {
   res.status(500).send(error);
 }
