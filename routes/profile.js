@@ -1,22 +1,23 @@
 var express = require("express");
 var router = express.Router();
-var jwt = require("jsonwebtoken");
+// var jwt = require("jsonwebtoken");
 var models = require("../models");
 const Sequelize = require("sequelize");
 require("dotenv").config();
-var bcrypt = require("bcrypt");
-const saltRounds = 10;
-const supersecret = process.env.SUPER_SECRET;
+// var bcrypt = require("bcrypt");
+// const saltRounds = 10;
+// const supersecret = process.env.SUPER_SECRET;
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 
 
+
 //Alys: get user information by id (for dashboard) - need to test with log in (before was :id)
-router.get("/user", userShouldBeLoggedIn, async function (req, res) {
-    const { id } = req;
-  
+router.get("/", userShouldBeLoggedIn, async function (req, res) {
+    const { user_id } = req;
     try {
       //find the user using the primary key
-      const user = await models.User.findByPk(id);
+      const user = await models.User.findByPk(user_id);
+    //   const user = await models.User.findOne({ where: { id: id } });
       res.send(user);
     } catch (error) {
       res.status(500).send(error);
@@ -47,22 +48,30 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
   
   //Alys: add a new catagory/ user relationship - test this 
   
-  router.post("categories", userShouldBeLoggedIn, async function (req, res){
-    const { id } = req;
-    const { categories } = req.body; //want to make this a list so it can be a drop down 
+  router.post("/:id/categories", async function (req, res){
+    const { id } = req.params; //this will be just req when it works on login
+    const { categories } = req.body; 
+    //want to make this a list so it can be a drop down: const {categories} = req.body; 
     try {
     const user = await models.User.findOne({
       where: {
         id,
       },
     });
+    if (!user) {
+        return res.status(404).send("user not found")
+    } 
     
+    //will lose this find and error if when we want multiple categoeies
     // const category = await models.Category.findOne({
     //   where: {
     //     id: categories,
     //   },
     // });
-    await user.addCategory(categories);
+    // if (!category) {
+    //     return res.status(404).send("category not found")
+    // } 
+    await user.addCategories(categories); //when it is a list this will say add Categories and categories
     res.send(user);
   } catch (error) {
     res.status(500).send(error);

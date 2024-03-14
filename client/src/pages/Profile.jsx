@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 import {Container, Button, Row, Col, Image }from 'react-bootstrap';
-
+import useAuth from "../hooks/useAuth";
 
 export default function Profile() {
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({
+    firstname: "", lastname: "", email: "", total_points: 0
+  });
+  const [userServices, setUserServices] = useState([]);
 
+  
   async function getUserInfo () {
     console.log("this function call works")
     try {
-      const response = await fetch("api/profile/user", {
+      const response = await fetch("/api/profile", {
         method: "GET",
         headers: {"authorization": "Bearer " + localStorage.getItem("token")
       },
@@ -18,31 +22,44 @@ export default function Profile() {
       setUserInfo(data);
     } catch (err) {
       console.log(err);
-    }
-  }
+    };
+  };
 
   useEffect(() => {
     getUserInfo();
+    // getUserServices();
   }, [])
+
+  // async function getUserServices () {
+  //   console.log("this function call works")
+  //   try {
+  //     const response = await fetch("api/profile/myservices", {
+  //       method: "GET",
+  //       headers: {"authorization": "Bearer " + localStorage.getItem("token")
+  //     },
+  //     });
+  //     const data = await response.json();
+  //     setUserServices(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   };
+  // };
+
 
   return (
   <div className="profile">
 
-    <h1 className="text-center">Profile Page</h1>
+    <h1 className="text-center pt-5 pb-3">Profile Page</h1>
 
     <Container className="text-center">
       <Row>
         <Col className="profile-container">
         <h3 classname="m">Profile information</h3>
         {/* <Image src="holder.js/171x180" roundedCircle /> */}
-        <div className="image-container rounded-circle justify-center"></div>
-        <div>This is my information</div>
-        {/*I want to show their name, email used, and the categories they have assigned themselves*/
-        /* {userInfo.map((user) => (
-          <div key={user.id}>
-            <p>{user.firstname}</p>         
-            </div>
-        ))} */}
+        <div className="image-container rounded-circle center"></div>
+        <h5 className="mt-2">{userInfo.firstname} {userInfo.lastname}</h5>
+        <p>User email: {userInfo.email}</p>
+    
         <Button className="profile-button m-2">Update Information</Button>
         </Col>
  
@@ -65,8 +82,8 @@ export default function Profile() {
       <Row>
         <Col className="profile-container">
         <h3>Points</h3>
-        <p>Here is where my points are logged and updated</p>
-            {/*display the points attached to the user*/}
+        <p>Here is your current point score:</p>
+        <h4>{userInfo.total_points}</h4>
 
         </Col>
  

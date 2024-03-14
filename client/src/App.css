@@ -82,6 +82,7 @@ body {
 
 .image-container { 
   background-color: rgb(1, 37, 63);
+  margin-left: 505px;
   border-radius: 20px;
   max-height: 20px;
   max-width: 20px;

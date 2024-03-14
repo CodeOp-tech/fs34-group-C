@@ -32,7 +32,7 @@ export default function Request() {
   async function sendRequest() {
     // POST request into database
     try {
-      const response = await fetch(`/api/service`, {
+      const response = await fetch(`/api/index/service`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
