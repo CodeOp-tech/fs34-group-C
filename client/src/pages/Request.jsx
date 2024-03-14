@@ -31,15 +31,16 @@ export default function Request() {
     category_id: 0,
   });
 
-  // Storing my categories from the database in my file
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     getCategories();
   }, []);
 
+  // Storing my categories from the database in my file
   const getCategories = async () => {
     try {
-      const response = await fetch(`/api/categories`, {
+      const response = await fetch(`/api/index/categories`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -47,7 +48,6 @@ export default function Request() {
       console.log(response);
       const data = await response.json();
       setCategories(data);
-      // console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -170,9 +170,8 @@ export default function Request() {
                 />
               </Form.Group>
               <Form.Label>Job category:</Form.Label>
-
               <Form.Select
-                name="category"
+                name="category_id"
                 id="category"
                 className="josefin-sans-300"
                 value={request.category_id}
