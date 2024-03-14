@@ -5,6 +5,9 @@ import Row from "react-bootstrap/Row";
 import "../App.css";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
+import useAuth from "../hooks/useAuth";
+import AuthContext from "../contexts/AuthContext";
+import RequireAuth from "../components/RequireAuth";
 
 export default function Jobs() {
   return (
@@ -35,7 +38,7 @@ export default function Jobs() {
             <div>Date / Time: </div>
             <div>Points</div>
             <Button className="button josefin-sans-400" href="/Request">
-              Accept job
+              Details
             </Button>
           </Col>
           <Col className="job-box col-3 m-2">
@@ -48,7 +51,7 @@ export default function Jobs() {
             <div>Date / Time: </div>
             <div>Points</div>
             <Button className="button josefin-sans-400" href="/Request">
-              Accept job
+              Details
             </Button>
           </Col>
           <Col className="job-box col-3 m-2">
@@ -61,7 +64,7 @@ export default function Jobs() {
             <div>Date / Time: </div>
             <div>Points</div>
             <Button className="button josefin-sans-400" href="/Request">
-              Accept job
+              Details
             </Button>
           </Col>
           <Col className="job-box col-3 m-2">
@@ -74,7 +77,7 @@ export default function Jobs() {
             <div>Date / Time: </div>
             <div>Points</div>
             <Button className="button josefin-sans-400" href="/Request">
-              Accept job
+              Details
             </Button>
           </Col>
           <Col className="job-box col-3 m-2">
@@ -87,7 +90,7 @@ export default function Jobs() {
             <div>Date / Time: </div>
             <div>Points</div>
             <Button className="button josefin-sans-400" href="/Request">
-              Accept job
+              Details
             </Button>
           </Col>
           <Col className="job-box col-3 m-2">
@@ -100,7 +103,7 @@ export default function Jobs() {
             <div>Date / Time: </div>
             <div>Points</div>
             <Button className="button josefin-sans-400" href="/Request">
-              Accept job
+              Details
             </Button>
           </Col>
         </Row>

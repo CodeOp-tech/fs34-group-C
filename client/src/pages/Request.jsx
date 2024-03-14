@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -7,14 +7,51 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
 export default function Request() {
+  // Creating todays date for the date input field min-value
+  function yyyymmdd(dateIn) {
+    let yyyy = dateIn.getFullYear();
+
+    let mm = dateIn.getMonth() + 1; // getMonth() is zero-based
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    let dd = dateIn.getDate();
+    return String(`${yyyy}-${mm}-${dd}`); // Leading zeros for mm and dd
+  }
+  var today = new Date();
+  let date = yyyymmdd(today);
+
+  // Creating a request state to send to the backend as new request
   const [request, setRequest] = useState({
     service_name: "",
     service_description: "",
-    date: "2024-01-01",
+    date: date,
     time_required: 0,
     points: 1,
     category_id: 0,
   });
+
+  // Storing my categories from the database in my file
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = async () => {
+    try {
+      const response = await fetch(`/api/categories`, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      console.log(response);
+      const data = await response.json();
+      setCategories(data);
+      // console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // When the input in the form changes, my state is updated
   function handleChange(event) {
@@ -36,16 +73,16 @@ export default function Request() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: JSON.stringify(request),
       });
+      alert("New job submitted");
       console.log("New job request was submitted!");
     } catch (err) {
       console.log(err.message);
     }
   }
-
-  //
 
   return (
     <>
@@ -101,6 +138,7 @@ export default function Request() {
                   value={request.date}
                   onChange={handleChange}
                   className="josefin-sans-300"
+                  min="2024-03-14"
                 />
               </Form.Group>
 
@@ -132,24 +170,24 @@ export default function Request() {
                 />
               </Form.Group>
               <Form.Label>Job category:</Form.Label>
+
               <Form.Select
-                aria-label="Categories"
-                name="category_id"
-                onChange={handleChange}
-                value={request.category_id}
+                name="category"
+                id="category"
                 className="josefin-sans-300"
+                value={request.category_id}
+                onChange={handleChange}
               >
-                <option>Choose job category</option>
-                <option type="radio" value="1">
-                  Household
+                <option placeholder="choose Job Category">
+                  Select Job Category
                 </option>
-                <option type="radio" value="2">
-                  Social
-                </option>
-                <option type="radio" value="3">
-                  Tech assistance
-                </option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.category_name}
+                  </option>
+                ))}
               </Form.Select>
+
               <Button className="button mt-3" type="submit">
                 Submit
               </Button>
