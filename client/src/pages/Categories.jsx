@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Card, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 
 export default function Categories() {
   const [types, setTypes] = useState([]);
@@ -20,23 +20,25 @@ export default function Categories() {
   }, []);
   return (
     <div>
-      <h1>Browse jobs by Categories</h1>
-      <Row xs={1} md={2} lg={4} className="g-4">
-        {types.map((type, i) => (
-          <Col key={i}>
-            <Card style={{ width: "18rem" }}>
-              <Card.Body>
-                <Card.Title>{type.category_name}</Card.Title>
+      <Container>
+        <h1>Browse jobs by Categories</h1>
+        <Row xs={1} md={2} lg={4} className="g-4">
+          {types.map((type, i) => (
+            <Col key={i}>
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title>{type.category_name}</Card.Title>
 
-                <Card.Text>{type.category_description}</Card.Text>
-                <Card.Link as={Link} to="/jobs">
-                  See jobs
-                </Card.Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                  <Card.Text>{type.category_description}</Card.Text>
+                  <Card.Link as={Link} to="/jobs">
+                    See jobs
+                  </Card.Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 }
