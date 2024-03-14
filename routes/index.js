@@ -23,11 +23,10 @@ router.get("/profile", userShouldBeLoggedIn, async function (req, res, next) {
   }
 });
 
-
 // Alys - get all services for one user
 //question to self: shall we use this same endpoint and then map through them to show different keys - possibly yes
 
-router.get("/myservices", userShouldBeLoggedIn, async function (req, res) { 
+router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
   const { id } = req;
   try {
     models.User.findOne({
@@ -37,37 +36,34 @@ router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
     });
 
     const services = await user.getServices();
-    res.send(services)
-  
-
-} catch (error) {
-  res.status(500).send(error);
-}
+    res.send(services);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
-//Alys: add a new catagory/ user relationship - test this 
+//Alys: add a new catagory/ user relationship - test this
 
-router.post("categories", userShouldBeLoggedIn, async function (req, res){
+router.post("categories", userShouldBeLoggedIn, async function (req, res) {
   const { id } = req;
-  const { categories } = req.body; //want to make this a list so it can be a drop down 
+  const { categories } = req.body; //want to make this a list so it can be a drop down
   try {
-  const user = await models.User.findOne({
-    where: {
-      id,
-    },
-  });
-  
-  // const category = await models.Category.findOne({
-  //   where: {
-  //     id: categories,
-  //   },
-  // });
-  await user.addCategory(categories);
-  res.send(user);
-} catch (error) {
-  res.status(500).send(error);
-}
+    const user = await models.User.findOne({
+      where: {
+        id,
+      },
+    });
 
+    // const category = await models.Category.findOne({
+    //   where: {
+    //     id: categories,
+    //   },
+    // });
+    await user.addCategory(categories);
+    res.send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 /* Create service request (Jana) */
@@ -95,6 +91,18 @@ router.post("/service", userShouldBeLoggedIn, async function (req, res) {
     res.send(service);
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const response = await models.Category.findAll({
+      attributes: ["category_name"],
+    });
+    res.send(response);
+    // res.send({ title: "Express" });
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 
