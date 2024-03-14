@@ -58,14 +58,7 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route
-            path="/jobs"
-            element={
-              <RequireAuth>
-                <Jobs />
-              </RequireAuth>
-            }
-          />
+          <Route path="/jobs" element={<Jobs />} />
           <Route
             path="/details"
             element={
