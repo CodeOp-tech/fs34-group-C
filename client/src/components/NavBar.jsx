@@ -20,7 +20,7 @@ export default function NavBar() {
   };
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary mb-4">
+      <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand as={Link} to="/">
             TimeShare
