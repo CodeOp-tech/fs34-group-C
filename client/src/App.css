@@ -2,11 +2,6 @@ body {
   background-color: #fff5cb;
 }
 
-.home-img {
-  border-radius: 10%;
-  border: 2px solid black;
-  padding: 0px;
-}
 .button {
   background-color: #e2edf1;
   color: rgb(97, 96, 96);
@@ -15,8 +10,52 @@ body {
   border: 1.9px solid rgb(97, 96, 96);
 }
 
-.home-title {
-  /* font-family: monospace; */
+.welcome-title {
+  font-size: 100px;
+  line-height: 80px;
+}
+.request-title {
+  font-size: 100px;
+  line-height: auto;
+}
+.img {
+  border-radius: 10%;
+  /* border: 2px solid black; */
+  padding: 0px;
+  margin-left: 10px;
+  width: 400px;
+}
+.sacramento-regular {
+  font-family: "Sacramento", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.josefin-sans-400 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.josefin-sans-300 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.job-box {
+  border-radius: 20px;
+  border: 2px solid rgb(115, 113, 113);
+  padding: 20px;
+}
+
+.icon {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  max-height: 120px;
+  border: 1px solid rgb(115, 113, 113);
 }
 
 .profile {
