@@ -39,10 +39,12 @@ export default function Profile() {
   //     console.log(err);
   //   }
   // }
+  
   useEffect(() => {
     getUserInfo();
     // getUserServices();
   }, []);
+
 
   return (
     <div className="profile">
@@ -70,6 +72,7 @@ export default function Profile() {
 
             <Button className="profile-button m-2">Create New Request</Button>
           </Col>
+
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
