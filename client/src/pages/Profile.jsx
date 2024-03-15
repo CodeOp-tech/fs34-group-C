@@ -39,54 +39,16 @@ export default function Profile() {
   //     console.log(err);
   //   }
   // }
+  
   useEffect(() => {
     getUserInfo();
     // getUserServices();
   }, []);
 
-  // useEffect(() => {
-  //   getUserServices();
-  // }, [])
-
-  // async function getUserServices () {
-  //   console.log("this function call works")
-  //   try {
-  //     const response = await fetch("/api/profile/myservices", {
-  //       method: "GET",
-  //       headers: {"authorization": "Bearer " + localStorage.getItem("token")
-  //     },
-  //     });
-  //     const data = await response.json();
-  //     setUserServices(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   };
-  // };
-
-
 
   return (
     <div className="profile">
       <h1 className="profile-title text-center pt-5 pb-3">Profile Page</h1>
-
-
-    <Container className="text-center">
-      <Row>
-        <Col className="profile-container">
-        <h3 className="m">Profile information</h3>
-        <div className="image-container rounded-circle"></div>
-        <h5 className="mt-2">{userInfo.firstname} {userInfo.lastname}</h5>
-        <p>User email: {userInfo.email}</p>
-    
-        <Button className="profile-button m-2">Update Information</Button>
-        </Col>
- 
-      </Row>
-      <Row>
-        <Col className="profile-container"><h3>My Service Requests</h3>
-        <p>Here go all the service requests I've posted</p>
-        {/*map through all the service request names, which will show up as links. also want to add in*/}
-        {/* <h5 className="mt-2">{userServices.service_name}</h5> */}
 
       <Container className="text-center">
         <Row>
@@ -97,7 +59,6 @@ export default function Profile() {
               {userInfo.firstname} {userInfo.lastname}
             </h5>
             <p>User email: {userInfo.email}</p>
-
 
             <Button className="profile-button m-2">Update Information</Button>
           </Col>
@@ -111,6 +72,7 @@ export default function Profile() {
 
             <Button className="profile-button m-2">Create New Request</Button>
           </Col>
+
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
