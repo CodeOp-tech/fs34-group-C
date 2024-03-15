@@ -47,6 +47,7 @@ export default function Profile() {
     getUserServices();
   }, []);
 
+
   return (
     <div className="profile">
       <h1 className="profile-title text-center pt-5 pb-3">Profile Page</h1>
@@ -76,6 +77,7 @@ export default function Profile() {
 
             <Button className="profile-button m-2">Create New Request</Button>
           </Col>
+
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
