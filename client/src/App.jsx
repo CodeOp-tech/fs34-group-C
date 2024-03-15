@@ -17,7 +17,7 @@ import AuthContext from "./contexts/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   function signIn() {
     setIsLoggedIn(true);

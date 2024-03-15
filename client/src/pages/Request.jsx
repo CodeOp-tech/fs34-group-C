@@ -40,7 +40,7 @@ export default function Request() {
   // Storing my categories from the database in my file
   const getCategories = async () => {
     try {
-      const response = await fetch(`/api/index/categories`, {
+      const response = await fetch(`/api/index/types`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
