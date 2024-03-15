@@ -30,7 +30,7 @@ export default function Categories() {
                   <Card.Title>{type.category_name}</Card.Title>
 
                   <Card.Text>{type.category_description}</Card.Text>
-                  <Card.Link as={Link} to={"/jobs"}>
+                  <Card.Link as={Link} to={`/jobs?category=${type.id}`}>
                     See jobs
                   </Card.Link>
                 </Card.Body>

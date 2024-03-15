@@ -1,17 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import "../App.css";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import useAuth from "../hooks/useAuth";
-import AuthContext from "../contexts/AuthContext";
-import RequireAuth from "../components/RequireAuth";
+import { useSearchParams } from "react-router-dom";
 
 export default function Jobs() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category");
+  const [servicesByCat, setServicesByCat] = useState([]);
+
+  // useEffect(() => {
+  //   getJobsByCategory();
+  // }, []);
+
+  // const getJobsByCategory = async () => {
+  //   try {
+  //     // get All Jobs listed under a certain Category Id (which is given to me by usesearchParams)
+  //     const response = await fetch(`/index/services?category=${category}`);
+  //     const data = await response.json();
+  //     console.log(data);
+  // // setServicesByCat(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <>
+      {/* <div>
+        <ul>
+          {serviceByCat.map((job) => (
+            <li key={job.id}>
+              <div className="container">
+                <div className="separateItems row">
+                  <Link
+                    className="text-decoration-none text-success col-6"
+                    to={`/singleitem?item=${item.id}`}
+                  >
+                    <span>
+                      {item.colour} {item.type}
+                    </span>
+                  </Link>
+                  <div className="col">
+                    {item.image ? (
+                      <img src={item.image} className="small_img" />
+                    ) : (
+                      <img src={default_picture} className="small_img" />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div> */}
+
       <Container>
         <Row className="mt-5 mr-5 ml-5 justify-content-md-center ">
           <Col xs={12} md={6}>
@@ -108,7 +154,7 @@ export default function Jobs() {
           </Col>
         </Row>
       </Container>
-      Placeholder / ideas for icons:
+      {/* Placeholder / ideas for icons:
       <Image
         className="icon"
         src="https://cdni.iconscout.com/illustration/premium/thumb/house-cleaning-service-4715607-3932688.png"
@@ -136,7 +182,7 @@ export default function Jobs() {
       <Image
         className="icon"
         src="https://www.pngfind.com/pngs/b/509-5092285_last-mile-delivery-delivery-van-car-cartoon-hd.png"
-      ></Image>
+      ></Image> */}
     </>
   );
 }

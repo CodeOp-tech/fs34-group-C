@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -28,7 +27,7 @@ export default function Request() {
     date: date,
     time_required: 0,
     points: 1,
-    category_id: 0,
+    CategoryId: 0,
   });
 
   const [categories, setCategories] = useState([]);
@@ -45,7 +44,6 @@ export default function Request() {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
-      console.log(response);
       const data = await response.json();
       setCategories(data);
     } catch (err) {
@@ -69,7 +67,7 @@ export default function Request() {
   async function sendRequest() {
     // POST request into database
     try {
-      const response = await fetch(`/api/index/service`, {
+      const response = await fetch(`/api/index/services`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -171,10 +169,10 @@ export default function Request() {
               </Form.Group>
               <Form.Label>Job category:</Form.Label>
               <Form.Select
-                name="category_id"
+                name="CategoryId"
                 id="category"
                 className="josefin-sans-300"
-                value={request.category_id}
+                value={request.CategoryId}
                 onChange={handleChange}
               >
                 <option placeholder="choose Job Category">
