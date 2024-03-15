@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       date: DataTypes.DATE,
       time_required: DataTypes.INTEGER,
       points: DataTypes.INTEGER,
+      category_id: DataTypes.INTEGER,
     },
     {
       sequelize,

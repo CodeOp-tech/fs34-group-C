@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -9,7 +8,7 @@ export default function Categories() {
 
   const fectchTypes = async () => {
     try {
-      const response = await axios.get("/api/types");
+      const response = await axios.get("/api/index/types");
       console.log(response);
       setTypes(response.data);
     } catch (error) {
@@ -31,7 +30,7 @@ export default function Categories() {
                   <Card.Title>{type.category_name}</Card.Title>
 
                   <Card.Text>{type.category_description}</Card.Text>
-                  <Card.Link as={Link} to="/jobs">
+                  <Card.Link as={Link} to={"/jobs"}>
                     See jobs
                   </Card.Link>
                 </Card.Body>
@@ -41,6 +40,5 @@ export default function Categories() {
         </Row>
       </Container>
     </div>
-
   );
 }
