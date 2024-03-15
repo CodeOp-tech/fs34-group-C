@@ -26,7 +26,7 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
       attributes: ["email", "firstname", "lastname", "total_points"],
       where: { id: user_id },
     });
-    res.json(response);
+    res.send(response);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -36,20 +36,34 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
 //question to self: shall we use this same endpoint and then map through them to show different keys - possibly yes
 
 // router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
-//   const { id } = req;
+//   const { user_id } = req;
 //   try {
 //     models.User.findOne({
 //       where: {
-//         id,
+//         id: user_id,
 //       },
 //     });
 
 //     const services = await user.getServices();
+//     console.log(services);
 //     res.send(services);
 //   } catch (error) {
 //     res.status(500).send(error);
 //   }
 // });
+
+// Ari trial
+router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
+  const { user_id } = req;
+  try {
+    const response = await models.Service.findAll({
+      where: { service_creator: user_id },
+    });
+    res.send(response);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 //Alys: add a new catagory/ user relationship - test this
 

@@ -9,7 +9,7 @@ export default function Profile() {
     email: "",
     total_points: 0,
   });
-  const [userServices, setUserServices] = useState({ service_name: "" });
+  const [userServices, setUserServices] = useState([]);
 
   async function getUserInfo() {
     try {
@@ -19,29 +19,32 @@ export default function Profile() {
       });
 
       const data = await response.json();
-      console.log(data);
       setUserInfo(data);
     } catch (err) {
       console.log(err);
     }
   }
 
-  // async function getUserServices() {
-  //   console.log("this function call works");
-  //   try {
-  //     const response = await fetch("/api/profile/myservices", {
-  //       method: "GET",
-  //       headers: { authorization: "Bearer " + localStorage.getItem("token") },
-  //     });
-  //     const data = await response.json();
-  //     setUserServices(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  async function getUserServices() {
+    try {
+      const response = await fetch("/api/profile/myservices", {
+        method: "GET",
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      const data = await response.json();
+      console.log(data);
+      setUserServices(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     getUserInfo();
-    // getUserServices();
+  }, []);
+
+  useEffect(() => {
+    getUserServices();
   }, []);
 
   return (
@@ -65,8 +68,11 @@ export default function Profile() {
           <Col className="profile-container">
             <h3>My Service Requests</h3>
             <p>Here go all the service requests I've posted</p>
-            {/*map through all the service request names, which will show up as links. also want to add in*/}
-            <h5 className="mt-2">{userServices.service_name}</h5>
+            {userServices.map((userService, i) => (
+              <h5 className="mt-2" key={i}>
+                {userService.service_name}
+              </h5>
+            ))}
 
             <Button className="profile-button m-2">Create New Request</Button>
           </Col>
