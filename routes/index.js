@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
 });
 
 /* Create service request (Jana) */
-router.post("/service", userShouldBeLoggedIn, async function (req, res) {
+router.post("/services", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   const {
     service_name, // a title
@@ -19,7 +19,7 @@ router.post("/service", userShouldBeLoggedIn, async function (req, res) {
     date, // on which day do I need the job to be done
     time_required, // how many hours my job will take
     points, // how many points you can earn by doing this job
-    category_id, // to which of the pre-defined categories the job belongs
+    CategoryId, // to which of the pre-defined categories the job belongs
   } = req.body;
 
   try {
@@ -30,7 +30,7 @@ router.post("/service", userShouldBeLoggedIn, async function (req, res) {
       time_required,
       points,
       service_creator: user_id,
-      category_id,
+      CategoryId,
     });
     res.send(service);
   } catch (error) {
@@ -38,14 +38,15 @@ router.post("/service", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
-// // Jana GET all categorie names
-// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
+// Get all jobs by a certain Category ID (Jana)
+// router.get("/services", async function (req, res) {
 //   try {
-//     const response = await models.Category.findAll({
-//       attributes: ["category_name"],
+//     const { category } = req.query;
+//     const response = await models.Service.findAll({
+//       where: { CategoryId: category },
 //     });
+//     console.log(response);
 //     res.send(response);
-//     // res.send({ title: "Express" });
 //   } catch (err) {
 //     res.status(500).send(err);
 //   }
