@@ -1,63 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import "../App.css";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 export default function Jobs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category");
   const [servicesByCat, setServicesByCat] = useState([]);
 
-  // useEffect(() => {
-  //   getJobsByCategory();
-  // }, []);
+  useEffect(() => {
+    getJobsByCategory();
+  }, []);
 
-  // const getJobsByCategory = async () => {
-  //   try {
-  //     // get All Jobs listed under a certain Category Id (which is given to me by usesearchParams)
-  //     const response = await fetch(`/index/services?category=${category}`);
-  //     const data = await response.json();
-  //     console.log(data);
-  // // setServicesByCat(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
+  // get All Jobs listed under a certain Category Id (which is given to me by usesearchParams)
+  const getJobsByCategory = async () => {
+    try {
+      const response = await fetch(`api/index/services?category=${category}`);
+      const data = await response.json();
+      setServicesByCat(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
-      {/* <div>
-        <ul>
-          {serviceByCat.map((job) => (
-            <li key={job.id}>
-              <div className="container">
-                <div className="separateItems row">
-                  <Link
-                    className="text-decoration-none text-success col-6"
-                    to={`/singleitem?item=${item.id}`}
-                  >
-                    <span>
-                      {item.colour} {item.type}
-                    </span>
-                  </Link>
-                  <div className="col">
-                    {item.image ? (
-                      <img src={item.image} className="small_img" />
-                    ) : (
-                      <img src={default_picture} className="small_img" />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div> */}
-
       <Container>
         <Row className="mt-5 mr-5 ml-5 justify-content-md-center ">
           <Col xs={12} md={6}>
@@ -73,85 +43,31 @@ export default function Jobs() {
             </div>
           </Col>
         </Row>
+
+        {/* Mapping through all my Jobs per given Category and displaying info about them */}
         <Row className="mr-5 ml-5 justify-content-md-center ">
-          <Col className="job-box col-3 m-2">
-            <Image
-              className="icon"
-              src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-            ></Image>
-            <div>Jobs name</div>
-            <div>Description blablablablkajsdlkfjalskdjflaksjdf</div>
-            <div>Date / Time: </div>
-            <div>Points</div>
-            <Button className="button josefin-sans-400" href="/Request">
-              Details
-            </Button>
-          </Col>
-          <Col className="job-box col-3 m-2">
-            <Image
-              className="icon"
-              src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-            ></Image>
-            <div>Jobs name</div>
-            <div>Description blablablablkajsdlkfjalskdjflaksjdf</div>
-            <div>Date / Time: </div>
-            <div>Points</div>
-            <Button className="button josefin-sans-400" href="/Request">
-              Details
-            </Button>
-          </Col>
-          <Col className="job-box col-3 m-2">
-            <Image
-              className="icon"
-              src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-            ></Image>
-            <div>Jobs name</div>
-            <div>Description blablablablkajsdlkfjalskdjflaksjdf</div>
-            <div>Date / Time: </div>
-            <div>Points</div>
-            <Button className="button josefin-sans-400" href="/Request">
-              Details
-            </Button>
-          </Col>
-          <Col className="job-box col-3 m-2">
-            <Image
-              className="icon"
-              src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-            ></Image>
-            <div>Jobs name</div>
-            <div>Description blablablablkajsdlkfjalskdjflaksjdf</div>
-            <div>Date / Time: </div>
-            <div>Points</div>
-            <Button className="button josefin-sans-400" href="/Request">
-              Details
-            </Button>
-          </Col>
-          <Col className="job-box col-3 m-2">
-            <Image
-              className="icon"
-              src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-            ></Image>
-            <div>Jobs name</div>
-            <div>Description blablablablkajsdlkfjalskdjflaksjdf</div>
-            <div>Date / Time: </div>
-            <div>Points</div>
-            <Button className="button josefin-sans-400" href="/Request">
-              Details
-            </Button>
-          </Col>
-          <Col className="job-box col-3 m-2">
-            <Image
-              className="icon"
-              src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-            ></Image>
-            <div>Jobs name</div>
-            <div>Description blablablablkajsdlkfjalskdjflaksjdf</div>
-            <div>Date / Time: </div>
-            <div>Points</div>
-            <Button className="button josefin-sans-400" href="/Request">
-              Details
-            </Button>
-          </Col>
+          {servicesByCat.map((service) => (
+            <Col className="job-box col-3 m-2" key={service.id}>
+              <Image
+                className="icon"
+                src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
+              ></Image>
+
+              <div>Job title: {service.service_name}</div>
+              <div>Job description: {service.service_description}</div>
+              <div>
+                Date of fulfillment:{" "}
+                {`${service.date.substr(8, 2)}.${service.date.substr(
+                  5,
+                  2
+                )}.${service.date.substr(0, 4)}`}
+              </div>
+              <div>Points to earn: {service.points}</div>
+              <Button className="button josefin-sans-400" href="/Request">
+                Details
+              </Button>
+            </Col>
+          ))}
         </Row>
       </Container>
       {/* Placeholder / ideas for icons:
