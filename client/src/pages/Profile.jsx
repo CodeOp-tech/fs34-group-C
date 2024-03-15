@@ -28,24 +28,24 @@ export default function Profile() {
     getUserInfo();
   }, []);
 
-  // useEffect(() => {
-  //   getUserServices();
-  // }, [])
+  useEffect(() => {
+    getUserServices();
+  }, [])
 
-  // async function getUserServices () {
-  //   console.log("this function call works")
-  //   try {
-  //     const response = await fetch("api/profile/myservices", {
-  //       method: "GET",
-  //       headers: {"authorization": "Bearer " + localStorage.getItem("token")
-  //     },
-  //     });
-  //     const data = await response.json();
-  //     setUserServices(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   };
-  // };
+  async function getUserServices () {
+    console.log("this function call works")
+    try {
+      const response = await fetch("/api/profile/myservices", {
+        method: "GET",
+        headers: {"authorization": "Bearer " + localStorage.getItem("token")
+      },
+      });
+      const data = await response.json();
+      setUserServices(data);
+    } catch (err) {
+      console.log(err);
+    };
+  };
 
 
   return (
@@ -69,7 +69,7 @@ export default function Profile() {
         <Col className="profile-container"><h3>My Service Requests</h3>
         <p>Here go all the service requests I've posted</p>
         {/*map through all the service request names, which will show up as links. also want to add in*/}
-        {/* <h5 className="mt-2">{userServices.service_name}</h5> */}
+        <h5 className="mt-2">{userServices.service_name}</h5>
 
         <Button className="profile-button m-2">Create New Request</Button>
         </Col>

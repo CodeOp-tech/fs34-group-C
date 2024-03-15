@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
     const user = await models.User.findOne({ where: { email: email } });
     if (user) {
       const user_id = user.id;
-
+console.log(user_id)
       const correctPassword = await bcrypt.compare(password, user.password);
 
       if (!correctPassword) throw new Error("Incorrect password");
@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
       var token = jwt.sign({ user_id }, supersecret);
       res.send({ message: "Login successful, here is your token", token });
     } else {
-      throw new Error("User does not exist");
+      res.status(404).send({ message: "User not found" });
     }
   } catch (err) {
     res.status(500).send({ message: err.message });
