@@ -1,15 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import {
-  Container,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Form,
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export default function NavBar() {
   const { isLoggedIn, signIn, signOut } = useAuth();
@@ -54,20 +45,6 @@ export default function NavBar() {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-          <Form inline>
-            <Row>
-              <Col xs="auto">
-                <Form.Control
-                  type="text"
-                  placeholder="Search"
-                  className=" mr-sm-2"
-                />
-              </Col>
-              <Col xs="auto">
-                <Button type="submit">Submit</Button>
-              </Col>
-            </Row>
-          </Form>
         </Container>
       </Navbar>
     </div>
