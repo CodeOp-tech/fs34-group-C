@@ -38,6 +38,7 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
+
 // Get all jobs by a certain Category ID (Jana)
 // router.get("/services", async function (req, res) {
 //   try {
@@ -51,6 +52,7 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 //     res.status(500).send(err);
 //   }
 // });
+
 
 // Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {
