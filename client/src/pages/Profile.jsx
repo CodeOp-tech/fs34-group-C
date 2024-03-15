@@ -45,6 +45,33 @@ export default function Profile() {
   }, []);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+||||||||| 52b18e2
+  useEffect(() => {
+    getUserServices();
+  }, [])
+
+  async function getUserServices () {
+    console.log("this function call works")
+    try {
+      const response = await fetch("/api/profile/myservices", {
+        method: "GET",
+        headers: {"authorization": "Bearer " + localStorage.getItem("token")
+      },
+      });
+      const data = await response.json();
+      setUserServices(data);
+    } catch (err) {
+      console.log(err);
+    };
+  };
+
+
+=========
+=======
+>>>>>>> main
   // useEffect(() => {
   //   getUserServices();
   // }, [])
@@ -65,6 +92,7 @@ export default function Profile() {
   // };
 
 
+<<<<<<< HEAD
 ||||||| 52b18e2
   useEffect(() => {
     getUserServices();
@@ -88,21 +116,50 @@ export default function Profile() {
 
 =======
 >>>>>>> main
+||||||| merged common ancestors
+>>>>>>>>> Temporary merge branch 2
+=======
+
+>>>>>>> main
   return (
     <div className="profile">
       <h1 className="profile-title text-center pt-5 pb-3">Profile Page</h1>
 
-      <Container className="text-center">
-        <Row>
-          <Col className="profile-container">
-            <h3 className="m">Profile information</h3>
-            <div className="image-container rounded-circle"></div>
-            <h5 className="mt-2">
-              {userInfo.firstname} {userInfo.lastname}
-            </h5>
-            <p>User email: {userInfo.email}</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+            <Button className="profile-button m-2">Update Information</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="profile-container">
+            <h3>My Service Requests</h3>
+            <p>Here go all the service requests I've posted</p>
+            {/*map through all the service request names, which will show up as links. also want to add in*/}
+            <h5 className="mt-2">{userServices.service_name}</h5>
+||||||||| 52b18e2
+    <Container className="text-center">
+      <Row>
+        <Col className="profile-container">
+        <h3 className="m">Profile information</h3>
+        <div className="image-container rounded-circle"></div>
+        <h5 className="mt-2">{userInfo.firstname} {userInfo.lastname}</h5>
+        <p>User email: {userInfo.email}</p>
+    
+        <Button className="profile-button m-2">Update Information</Button>
+        </Col>
+ 
+      </Row>
+      <Row>
+        <Col className="profile-container"><h3>My Service Requests</h3>
+        <p>Here go all the service requests I've posted</p>
+        {/*map through all the service request names, which will show up as links. also want to add in*/}
+        <h5 className="mt-2">{userServices.service_name}</h5>
+=========
+=======
+>>>>>>> main
     <Container className="text-center">
       <Row>
         <Col className="profile-container">
@@ -120,6 +177,7 @@ export default function Profile() {
         <p>Here go all the service requests I've posted</p>
         {/*map through all the service request names, which will show up as links. also want to add in*/}
         {/* <h5 className="mt-2">{userServices.service_name}</h5> */}
+<<<<<<< HEAD
 ||||||| 52b18e2
     <Container className="text-center">
       <Row>
@@ -139,6 +197,31 @@ export default function Profile() {
         {/*map through all the service request names, which will show up as links. also want to add in*/}
         <h5 className="mt-2">{userServices.service_name}</h5>
 =======
+            <Button className="profile-button m-2">Update Information</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="profile-container">
+            <h3>My Service Requests</h3>
+            <p>Here go all the service requests I've posted</p>
+            {/*map through all the service request names, which will show up as links. also want to add in*/}
+            <h5 className="mt-2">{userServices.service_name}</h5>
+>>>>>>> main
+||||||| merged common ancestors
+>>>>>>>>> Temporary merge branch 2
+=======
+
+      <Container className="text-center">
+        <Row>
+          <Col className="profile-container">
+            <h3 className="m">Profile information</h3>
+            <div className="image-container rounded-circle"></div>
+            <h5 className="mt-2">
+              {userInfo.firstname} {userInfo.lastname}
+            </h5>
+            <p>User email: {userInfo.email}</p>
+
+
             <Button className="profile-button m-2">Update Information</Button>
           </Col>
         </Row>

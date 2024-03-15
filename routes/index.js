@@ -39,6 +39,7 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ||||||| 52b18e2
 // // Jana GET all categorie names
 // router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
@@ -53,6 +54,11 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 //   }
 // });
 =======
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+=======
+
+>>>>>>> main
 // Get all jobs by a certain Category ID (Jana)
 // router.get("/services", async function (req, res) {
 //   try {
@@ -66,6 +72,26 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 //     res.status(500).send(err);
 //   }
 // });
+<<<<<<< HEAD
+>>>>>>> main
+||||||| merged common ancestors
+||||||||| 52b18e2
+// // Jana GET all categorie names
+// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
+//   try {
+//     const response = await models.Category.findAll({
+//       attributes: ["category_name"],
+//     });
+//     res.send(response);
+//     // res.send({ title: "Express" });
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+=========
+>>>>>>>>> Temporary merge branch 2
+=======
+
 >>>>>>> main
 
 // Ari GET categories, select * from categories
