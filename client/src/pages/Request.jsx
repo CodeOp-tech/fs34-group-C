@@ -61,6 +61,14 @@ export default function Request() {
   function handleSubmit(event) {
     event.preventDefault();
     sendRequest();
+    setRequest({
+      service_name: "",
+      service_description: "",
+      date: date,
+      time_required: 0,
+      points: 1,
+      CategoryId: 0,
+    });
   }
 
   // SEND my request to the backend
@@ -109,6 +117,7 @@ export default function Request() {
                   value={request.service_name}
                   onChange={handleChange}
                   className="josefin-sans-300"
+                  maxlength="20"
                 />
               </Form.Group>
               <Form.Group
