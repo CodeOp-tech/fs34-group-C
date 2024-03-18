@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [input, setInput] = useState([
     { email: "", password: "", firstname: "", lastname: "" },
   ]);
@@ -26,6 +28,7 @@ export default function Register() {
     try {
       await addUser();
       alert("You successfully registered!");
+      navigate("/login");
     } catch (err) {
       console.log(err.message);
     }

@@ -5,20 +5,7 @@ require("dotenv").config();
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const models = require("../models");
 
-//Alys: get user information by id (for dashboard) - need to test with log in (before was :id)
-// router.get("/", userShouldBeLoggedIn, async function (req, res) {
-//   const { user_id } = req;
-//   try {
-//     //find the user using the primary key
-//     const user = await models.User.findByPk(user_id);
-//     //   const user = await models.User.findOne({ where: { id: id } });
-//     res.send(user);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
-
-// Ari trial
+// GET for user details
 router.get("/user", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   try {
@@ -31,52 +18,6 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
     res.status(500).send(error);
   }
 });
-
-// Alys - get all services for one user
-//question to self: shall we use this same endpoint and then map through them to show different keys - possibly yes
-
-router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
-  const { user_id } = req;
-  try {
-    const user = await models.User.findOne({
-      where: {
-        id: user_id,
-      },
-    });
-console.log(user)
-    const services = await user.getServices();
-    console.log(services);
-    res.json(services);
-    
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
-// router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
-//   const { user_id } = req;
-//   try {
-
-//     models.User.findOne({
-//       where: {
-//         id: user_id,
-//       },
-//     });
-
-//     const services = await user.getServices();
-//     console.log(services);
-//     res.send(services);
-
-//     const response = await models.User.findOne({
-//       attributes: ["service_name"],
-//       where: { userId: id },
-//     });
-//     res.json(response);
-
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
 
 // Ari trial
 router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
