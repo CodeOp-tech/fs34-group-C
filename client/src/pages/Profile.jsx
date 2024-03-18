@@ -26,6 +26,7 @@ export default function Profile() {
     }
   }
 
+
   async function getUserServices() {
     console.log("this function call works");
     try {
@@ -39,10 +40,12 @@ export default function Profile() {
       console.log(err);
     }
   }
+
   useEffect(() => {
     getUserInfo();
     getUserServices();
   }, []);
+
 
   return (
     <div className="profile">
@@ -73,6 +76,7 @@ export default function Profile() {
             </Link>
             </Button>
           </Col>
+
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>

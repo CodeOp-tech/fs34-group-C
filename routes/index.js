@@ -53,18 +53,18 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 // });
 
 // Get all jobs by a certain Category ID (Jana)
-// router.get("/services", async function (req, res) {
-//   try {
-//     const { category } = req.query;
-//     const response = await models.Service.findAll({
-//       where: { CategoryId: category },
-//     });
-//     console.log(response);
-//     res.send(response);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
+router.get("/services", async function (req, res) {
+  try {
+    const { category } = req.query;
+    const response = await models.Service.findAll({
+      where: { CategoryId: category },
+    });
+    console.log(response);
+    res.send(response);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 
 // // Jana GET all categorie names
