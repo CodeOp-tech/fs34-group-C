@@ -36,59 +36,63 @@ function App() {
   return (
     <>
       <AuthContext.Provider value={authObject}>
-        <div>
+        <div className="wrapper">
           <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+          <div></div>
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
 
-            <Route
-              path="/profile"
-              element={
-                <RequireAuth>
-                  <Profile />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/request"
-              element={
-                <RequireAuth>
-                  <Request />
-                </RequireAuth>
-              }
-            />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route
-              path="/details"
-              element={
-                <RequireAuth>
-                  <Details />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/categories"
-              element={
-                <RequireAuth>
-                  <Categories />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/chatbox"
-              element={
-                <RequireAuth>
-                  <Chatbox />
-                </RequireAuth>
-              }
-            />
-            <Route path="*" element={<Page404 />} />
-          </Routes>
+              <Route
+                path="/profile"
+                element={
+                  <RequireAuth>
+                    <Profile />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/request"
+                element={
+                  <RequireAuth>
+                    <Request />
+                  </RequireAuth>
+                }
+              />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route
+                path="/details"
+                element={
+                  <RequireAuth>
+                    <Details />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/categories"
+                element={
+                  <RequireAuth>
+                    <Categories />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/chatbox"
+                element={
+                  <RequireAuth>
+                    <Chatbox />
+                  </RequireAuth>
+                }
+              />
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          </div>
+
+          <Footer />
         </div>
-        <Footer />
       </AuthContext.Provider>
     </>
   );

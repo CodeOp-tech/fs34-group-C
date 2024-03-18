@@ -6,11 +6,11 @@ import Row from "react-bootstrap/Row";
 
 export default function About() {
   return (
-    <>
+    <div className="profile pt-5 pb-3">
       <Container>
         <Row className="m-5 justify-content-md-center">
           <Col xs={12} md={6}>
-            <h1 className="sacramento-regular welcome-title">About</h1>
+            <h1 className="welcome-title josefin-sans-400">About</h1>
             <hr />
             <div className="josefin-sans-300 mt-4 mb-4">
               <strong>TimeShare</strong> is all about matching demand & supply -
@@ -30,10 +30,30 @@ export default function About() {
 
               <ul>
                 <li>Register an account and log in.</li>
-                <li>Complete your profile information in My Profile.</li>
+                <li>Complete your profile information in "Profile".</li>
                 <li>
                   Post a service request or accept listed job offers in
                   "Marketplace".
+                </li>
+                <li>
+                  Upon "accepting job", a new window will appear in your Chatbox
+                  and further information can be exchange between job poster and
+                  job accpetor.
+                </li>
+              </ul>
+            </div>
+            <div className="josefin-sans-300 mt-4 mb-4">
+              <h5>Point system</h5>
+
+              <ul>
+                <li>Upon registration, each user receives 100 points. </li>
+                <li>
+                  When postid a job request, 10 points are taken off your
+                  account.
+                </li>
+                <li>
+                  When accepting and fulfilling someone elses' job request, you
+                  earn the according amount of points
                 </li>
               </ul>
             </div>
@@ -46,6 +66,6 @@ export default function About() {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 }

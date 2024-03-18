@@ -32,47 +32,62 @@ function Login() {
     }
   };
   return (
-    <div>
+    <div className="pt-5 pb-3">
       <Container>
-        <Form>
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="2">
-              Email
-            </Form.Label>
-            <Form.Control
-              value={email}
-              onChange={handleChange}
-              name="email"
-              type="email"
-            />
-          </Form.Group>
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label column sm="2">
-              Password
-            </Form.Label>
-            <Form.Control
-              value={password}
-              onChange={handleChange}
-              name="password"
-              type="password"
-            />
-          </Form.Group>
-          <Button className="button" onClick={login}>
-            Log in
-          </Button>
-        </Form>
-        {isLoggedIn ? (
-          <div className="text-center p-4">
-            <div className="alert">You are logged in</div>
-          </div>
-        ) : (
-          <div className="text-center p-4">
-            <div className="mt-2">
-              Not registered yet? Click here to{" "}
-              <Link to="/register">Register</Link>
+        <Row className="m-5 justify-content-md-center">
+          <Col xs={12} md={6}>
+            <div className="sacramento-regular welcome-title ">
+              Share time,
+              <br />
+              share love
+              <br />
             </div>
-          </div>
-        )}
+            <div className="josefin-sans-400 fs-5">with TimeShare!</div>
+            <hr />
+            <div className="josefin-sans-400">Please login</div>
+            <Form className="josefin-sans-300">
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Email
+                </Form.Label>
+                <Form.Control
+                  value={email}
+                  onChange={handleChange}
+                  name="email"
+                  type="email"
+                  className="m-2 mt-0 mb-0"
+                />
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Password
+                </Form.Label>
+                <Form.Control
+                  value={password}
+                  onChange={handleChange}
+                  name="password"
+                  type="password"
+                  className="m-2 mt-0 mb-2"
+                />
+              </Form.Group>
+              <Button className="button" onClick={login}>
+                Log in
+              </Button>
+            </Form>
+            {isLoggedIn ? (
+              <div className="text-center p-4">
+                <div className="alert">You are logged in</div>
+              </div>
+            ) : (
+              <div className="text-center p-4">
+                <div className="mt-2">
+                  Not registered yet? Click here to{" "}
+                  <Link to="/register">Register</Link>
+                </div>
+              </div>
+            )}
+          </Col>
+        </Row>
       </Container>
     </div>
   );
