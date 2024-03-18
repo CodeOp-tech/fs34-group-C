@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import React, { useEffect, useState } from "react";
+import { Container, Card, Row, Col, Button, Image } from "react-bootstrap";
+
 import "../App.css";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
 import { useSearchParams, Link } from "react-router-dom";
 
 export default function Jobs() {
@@ -47,58 +44,34 @@ export default function Jobs() {
         {/* Mapping through all my Jobs per given Category and displaying info about them */}
         <Row className="mr-5 ml-5 justify-content-md-center ">
           {servicesByCat.map((service) => (
-            <Col className="job-box col-3 m-2" key={service.id}>
-              <Image
-                className="icon"
-                src="https://cdni.iconscout.com/illustration/premium/thumb/gardening-5590072-4671964.png?f=webp"
-              ></Image>
+            <Col className="josefin-sans-300 col-3" key={service.id}>
+              <Card className="mb-4">
+                <Card.Body>
+                  <Card.Title>{service.service_name}</Card.Title>
 
-              <div>Job title: {service.service_name}</div>
-              <div>Job description: {service.service_description}</div>
-              <div>
-                Date of fulfillment:{" "}
-                {`${service.date.substr(8, 2)}.${service.date.substr(
-                  5,
-                  2
-                )}.${service.date.substr(0, 4)}`}
-              </div>
-              <div>Points to earn: {service.points}</div>
-              <Button className="button josefin-sans-400" href="/Request">
-                Details
-              </Button>
+                  <Card.Text>
+                    Date of fulfillment:{" "}
+                    {`${service.date.substr(8, 2)}.${service.date.substr(
+                      5,
+                      2
+                    )}.${service.date.substr(0, 4)}`}
+                  </Card.Text>
+                  <Card.Text>Points to earn: {service.points}</Card.Text>
+                  <Card.Text className="overflow">
+                    {service.service_description}
+                  </Card.Text>
+                  <Button
+                    className="button josefin-sans-400 mt-2"
+                    href="/Details"
+                  >
+                    Details
+                  </Button>
+                </Card.Body>
+              </Card>
             </Col>
           ))}
         </Row>
       </Container>
-      {/* Placeholder / ideas for icons:
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/house-cleaning-service-4715607-3932688.png"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/tech-support-6992603-5699712.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/babysitter-or-mother-and-baby-girl-playing-with-toy-cubes-at-home-2931948-2463796.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://americare-v1709151372.websitepro-cdn.com/wp-content/uploads/2022/01/ameriCARE_RunningErrands_Illustration.png"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/craftsman-7281822-5950629.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/delivery-boy-3012842-2627456.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://www.pngfind.com/pngs/b/509-5092285_last-mile-delivery-delivery-van-car-cartoon-hd.png"
-      ></Image> */}
     </>
   );
 }

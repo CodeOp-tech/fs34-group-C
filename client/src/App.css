@@ -2,6 +2,12 @@ body {
   background-color: #fff5cb;
 }
 
+.footer {
+  background: white;
+  height: 100px;
+  margin: 0px;
+}
+
 .button {
   background-color: #e2edf1;
   color: rgb(97, 96, 96);
@@ -49,12 +55,13 @@ body {
   border-radius: 20px;
   border: 2px solid rgb(115, 113, 113);
   padding: 20px;
+  justify-content: center;
 }
 
 .icon {
   background-color: whitesmoke;
   border-radius: 10px;
-  max-height: 120px;
+  height: 200px;
   border: 1px solid rgb(115, 113, 113);
 }
 
@@ -84,7 +91,7 @@ body {
   color: rgb(0, 62, 69);
 }
 
-.image-container { 
+.image-container {
   background-color: rgb(1, 37, 63);
   border-radius: 20px;
   max-height: 30px;
@@ -95,4 +102,11 @@ body {
   border: 1.9px solid rgb(1, 58, 100);
   justify-content: center;
   display: flex;
+}
+
+.overflow {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
