@@ -7,6 +7,7 @@ const cors = require("cors"); // add at the top
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 var profileRouter = require("./routes/profile");
+var chatRouter = require("./routes/chat");
 
 var app = express();
 app.use(cors());
@@ -21,5 +22,6 @@ app.use(express.static(path.join(__dirname, "/client/dist")));
 app.use("/api/index", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);
+app.use("/api/chat", chatRouter);
 
 module.exports = app;

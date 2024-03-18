@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Service.belongsTo(models.Category, {
         foreignKey: "CategoryId",
       });
+      Service.hasMany(models.Message);
     }
   }
   Service.init(
