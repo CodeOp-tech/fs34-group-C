@@ -3,9 +3,11 @@ body {
 }
 
 .footer {
-  background: white;
-  height: 100px;
+  background: whitesmoke;
   margin: 0px;
+  position: static;
+  bottom: 0px;
+  width: 100%;
 }
 
 .button {
@@ -59,10 +61,10 @@ body {
 }
 
 .icon {
-  background-color: whitesmoke;
-  border-radius: 10px;
+  /* background-color: whitesmoke; */
+  /* border-radius: 10px; */
   height: 200px;
-  border: 1px solid rgb(115, 113, 113);
+  /* border: 1px solid rgb(115, 113, 113); */
 }
 
 .profile {
