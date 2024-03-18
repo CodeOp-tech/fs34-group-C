@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Button, Row, Col, Image } from "react-bootstrap";
 
 export default function Profile() {
@@ -9,26 +9,25 @@ export default function Profile() {
     email: "",
     total_points: 0,
   });
-  const [userServices, setUserServices] = useState({ service_name: "" });
+  const [userServices, setUserServices] = useState([]);
+  const [userJobs, setUserJobs] = useState([]);
 
+  //getting all of the user information from the database
   async function getUserInfo() {
     try {
       const response = await fetch("/api/profile/user", {
         method: "GET",
         headers: { authorization: "Bearer " + localStorage.getItem("token") },
       });
-
       const data = await response.json();
-      console.log(data);
       setUserInfo(data);
     } catch (err) {
       console.log(err);
     }
   }
 
-
+  //getting all of the service requests the user has made 
   async function getUserServices() {
-    console.log("this function call works");
     try {
       const response = await fetch("/api/profile/myservices", {
         method: "GET",
@@ -39,13 +38,36 @@ export default function Profile() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+   //getting all of the jobs the user is assigned to 
+  async function getUserJobs() {
+    try {
+      const response = await fetch("/api/profile/myjobs", {
+        method: "GET",
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      const data = await response.json();
+      setUserJobs(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
+
+  //ensuring we see something when we click on the page
   useEffect(() => {
     getUserInfo();
-    getUserServices();
   }, []);
 
+  useEffect(() => {
+   getUserServices();
+  }, []);
+
+  //button functions
+  const navigate = useNavigate();
+  const handleRequestClick = () => navigate("/Request");
+  const handleJobsClick = () => navigate("/Categories");
 
   return (
     <div className="profile">
@@ -67,22 +89,28 @@ export default function Profile() {
         <Row>
           <Col className="profile-container">
             <h3>My Service Requests</h3>
-            <p>Here go all the service requests I've posted</p>
-            {/*map through all the service request names, which will show up as links. also want to add in*/}
-            <h5 className="mt-2">{userServices.service_name}</h5>
+            <p>Upcoming service requests</p>
+            {userServices.map((userService, i) => (
+              <h5 className="mt-2" key={i}>
+                {userService.service_name}
+              </h5>
+            ))}
 
-            <Button className="profile-button m-2">
-            <Link to={"./pages/Request"}>Create New Request
-            </Link>
+            <Button className="profile-button m-2" onClick={handleRequestClick}>
+            Create New Request
             </Button>
           </Col>
 
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
-            <p>Here are all my upcoming jobs</p>
-            {/*map through all the upcoming job names, which will show up as links*/}
-            <Button className="profile-button m-2">
+            <p>Upcoming jobs</p>
+            {userJobs.map((userJob, i) => (
+              <h5 className="mt-2" key={i}>
+                {userJob.service_name}
+              </h5>
+            ))}
+            <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
               </Button>
           </Col>
@@ -92,6 +120,9 @@ export default function Profile() {
             <h3>Points</h3>
             <p>Here is your current point score:</p>
             <h4>{userInfo.total_points}</h4>
+            <Button className="profile-button m-2">
+              Get Rewards
+              </Button>
           </Col>
         </Row>
       </Container>
