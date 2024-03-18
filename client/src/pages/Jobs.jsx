@@ -24,7 +24,12 @@ export default function Jobs() {
   // get All Jobs listed under a certain Category Id (which is given to me by usesearchParams)
   const getJobsByCategory = async () => {
     try {
-      const response = await fetch(`api/index/services?category=${category}`);
+      const response = await fetch(`api/index/services?category=${category}`, {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       const data = await response.json();
       setServicesByCat(data);
     } catch (err) {
@@ -69,12 +74,13 @@ export default function Jobs() {
                   <Card.Text className="overflow">
                     {service.service_description}
                   </Card.Text>
+
+                  <Link to={`/jobs/${service.id}`}>
                   <Button
-                    className="button josefin-sans-400 mt-2"
-                    href="/Details"
-                  >
+                    className="button josefin-sans-400 mt-2">
                     Details
                   </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>

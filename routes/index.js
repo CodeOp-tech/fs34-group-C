@@ -53,11 +53,25 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 // });
 
 // Get all jobs by a certain Category ID (Jana)
-router.get("/services", async function (req, res) {
+router.get("/services", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { category } = req.query;
     const response = await models.Service.findAll({
       where: { CategoryId: category },
+    });
+    console.log(response);
+    res.send(response);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+// Get all information from one service by ID (Alys) - working 18/03
+router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
+  try {
+    const { id } = req.params;
+    const response = await models.Service.findOne({
+      where: { id: id },
     });
     console.log(response);
     res.send(response);
@@ -90,5 +104,7 @@ router.get("/types", async function (req, res, next) {
     res.status(500).send(error);
   }
 });
+
+//Alys GET all info of one job by id
 
 module.exports = router;

@@ -73,7 +73,7 @@ export default function Profile() {
     <div className="profile">
       <h1 className="profile-title text-center pt-5 pb-3">Profile Page</h1>
 
-      <Container className="text-center">
+      <Container className="text-center pb-5">
         <Row>
           <Col className="profile-container">
             <h3 className="m">Profile information</h3>
