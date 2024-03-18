@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Container, Button, Row, Col, Image } from "react-bootstrap";
 
 export default function Profile() {
@@ -17,7 +17,6 @@ export default function Profile() {
         method: "GET",
         headers: { authorization: "Bearer " + localStorage.getItem("token") },
       });
-
       const data = await response.json();
       setUserInfo(data);
     } catch (err) {
@@ -32,7 +31,6 @@ export default function Profile() {
         headers: { authorization: "Bearer " + localStorage.getItem("token") },
       });
       const data = await response.json();
-      console.log(data);
       setUserServices(data);
     } catch (err) {
       console.log(err);
@@ -44,7 +42,7 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
-    getUserServices();
+   getUserServices();
   }, []);
 
 
@@ -75,7 +73,10 @@ export default function Profile() {
               </h5>
             ))}
 
-            <Button className="profile-button m-2">Create New Request</Button>
+            <Button className="profile-button m-2">
+            <Link to={"./pages/Request"}>Create New Request
+            </Link>
+            </Button>
           </Col>
 
 
@@ -83,7 +84,9 @@ export default function Profile() {
             <h3>My Assigned Services</h3>
             <p>Here are all my upcoming jobs</p>
             {/*map through all the upcoming job names, which will show up as links*/}
-            <Button className="profile-button m-2">View Job Marketplace</Button>
+            <Button className="profile-button m-2">
+              View Job Marketplace
+              </Button>
           </Col>
         </Row>
         <Row>
