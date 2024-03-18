@@ -40,6 +40,10 @@ export default function About() {
                   and further information can be exchange between job poster and
                   job accpetor.
                 </li>
+                <li>
+                  TimeShare is a social and community-based platform. Please
+                  resprect our code of conduct.
+                </li>
               </ul>
             </div>
             <div className="josefin-sans-300 mt-4 mb-4">
