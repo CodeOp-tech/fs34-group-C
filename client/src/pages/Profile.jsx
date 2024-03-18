@@ -69,6 +69,7 @@ export default function Profile() {
   const handleJobsClick = () => navigate("/Categories");
 
   return (
+
     <div className="profile pt-5 pb-3">
       <Container>
         <Row className="m-5 justify-content-md-center">
@@ -78,6 +79,7 @@ export default function Profile() {
           </Col>
         </Row>
         <Row className="text-center">
+
           <Col className="profile-container">
             <h3 className="m">Profile information</h3>
             <div className="image-container rounded-circle"></div>
