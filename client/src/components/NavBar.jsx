@@ -44,6 +44,11 @@ export default function NavBar() {
                   </NavDropdown.Item>
                 )}
                 {isLoggedIn && (
+                  <NavDropdown.Item as={Link} to="/chatbox">
+                    Chats
+                  </NavDropdown.Item>
+                )}
+                {isLoggedIn && (
                   <NavDropdown.Item onClick={logout}>Log out</NavDropdown.Item>
                 )}
               </NavDropdown>
