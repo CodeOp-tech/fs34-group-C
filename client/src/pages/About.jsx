@@ -42,7 +42,7 @@ export default function About() {
                 </li>
                 <li>
                   TimeShare is a social and community-based platform. Please
-                  resprect our code of conduct.
+                  resprect our code of conduct. ♥︎
                 </li>
               </ul>
             </div>
