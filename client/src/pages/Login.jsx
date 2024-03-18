@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 
 function Login() {
+  const navigate = useNavigate();
   const { isLoggedIn, signIn } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -25,6 +26,7 @@ function Login() {
       localStorage.setItem("token", data.token);
       console.log(data.message, data.token);
       signIn();
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }

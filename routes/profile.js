@@ -5,8 +5,8 @@ require("dotenv").config();
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const models = require("../models");
 
-
 // Get user information for profile dashboard
+
 router.get("/user", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   try {
@@ -19,7 +19,6 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
     res.status(500).send(error);
   }
 });
-
 
 // Get all the services that the user created
 router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
