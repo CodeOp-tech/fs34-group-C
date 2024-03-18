@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Button, Row, Col, Image } from "react-bootstrap";
 
 export default function Profile() {
@@ -37,6 +37,7 @@ export default function Profile() {
     }
   }
 
+  //ensuring we see something when we click on the page
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -45,6 +46,10 @@ export default function Profile() {
    getUserServices();
   }, []);
 
+  //button functions
+  const navigate = useNavigate();
+  const handleRequestClick = () => navigate("/Request");
+  const handleJobsClick = () => navigate("/Jobs");
 
   return (
     <div className="profile">
@@ -73,9 +78,8 @@ export default function Profile() {
               </h5>
             ))}
 
-            <Button className="profile-button m-2">
-            <Link to={"./pages/Request"}>Create New Request
-            </Link>
+            <Button className="profile-button m-2" onClick={handleRequestClick}>
+            Create New Request
             </Button>
           </Col>
 
@@ -84,7 +88,7 @@ export default function Profile() {
             <h3>My Assigned Services</h3>
             <p>Here are all my upcoming jobs</p>
             {/*map through all the upcoming job names, which will show up as links*/}
-            <Button className="profile-button m-2">
+            <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
               </Button>
           </Col>
