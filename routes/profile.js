@@ -35,7 +35,7 @@ router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
 });
 
 //Get all the services the user is assigned to
-router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
+router.get("/myjobs", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   try {
     const response = await models.Service.findAll({

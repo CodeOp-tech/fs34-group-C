@@ -10,7 +10,9 @@ export default function Profile() {
     total_points: 0,
   });
   const [userServices, setUserServices] = useState([]);
+  const [userJobs, setUserJobs] = useState([]);
 
+  //getting all of the user information from the database
   async function getUserInfo() {
     try {
       const response = await fetch("/api/profile/user", {
@@ -24,6 +26,7 @@ export default function Profile() {
     }
   }
 
+  //getting all of the service requests the user has made 
   async function getUserServices() {
     try {
       const response = await fetch("/api/profile/myservices", {
@@ -35,7 +38,22 @@ export default function Profile() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+   //getting all of the jobs the user is assigned to 
+  async function getUserJobs() {
+    try {
+      const response = await fetch("/api/profile/myjobs", {
+        method: "GET",
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      const data = await response.json();
+      setUserJobs(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
+
 
   //ensuring we see something when we click on the page
   useEffect(() => {
@@ -49,7 +67,7 @@ export default function Profile() {
   //button functions
   const navigate = useNavigate();
   const handleRequestClick = () => navigate("/Request");
-  const handleJobsClick = () => navigate("/Jobs");
+  const handleJobsClick = () => navigate("/Categories");
 
   return (
     <div className="profile">
@@ -71,7 +89,7 @@ export default function Profile() {
         <Row>
           <Col className="profile-container">
             <h3>My Service Requests</h3>
-            <p>Here go all the service requests I've posted</p>
+            <p>Upcoming service requests</p>
             {userServices.map((userService, i) => (
               <h5 className="mt-2" key={i}>
                 {userService.service_name}
@@ -86,8 +104,12 @@ export default function Profile() {
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
-            <p>Here are all my upcoming jobs</p>
-            {/*map through all the upcoming job names, which will show up as links*/}
+            <p>Upcoming jobs</p>
+            {userJobs.map((userJob, i) => (
+              <h5 className="mt-2" key={i}>
+                {userJob.service_name}
+              </h5>
+            ))}
             <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
               </Button>
@@ -98,6 +120,9 @@ export default function Profile() {
             <h3>Points</h3>
             <p>Here is your current point score:</p>
             <h4>{userInfo.total_points}</h4>
+            <Button className="profile-button m-2">
+              Get Rewards
+              </Button>
           </Col>
         </Row>
       </Container>
