@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
 
 export default function Request() {
   // Creating todays date for the date input field min-value
@@ -31,6 +33,9 @@ export default function Request() {
   });
 
   const [categories, setCategories] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+
+  // const navigate = useNavigate();
 
   useEffect(() => {
     getCategories();
@@ -83,16 +88,18 @@ export default function Request() {
         },
         body: JSON.stringify(request),
       });
-      alert("New job submitted");
+      // alert("New job submitted");
       console.log("New job request was submitted!");
     } catch (err) {
       console.log(err.message);
     }
+    setSubmitted(true);
+    // navigate("/categories");
   }
 
   return (
     <>
-      <Container>
+      <Container className="mb-4">
         <Row className="justify-content-md-center josefin-sans-300">
           <Col xs lg="6">
             <div className="sacramento-regular request-title">
@@ -104,6 +111,17 @@ export default function Request() {
               Submit and send your request to Marketplace.
               <hr />
             </div>
+            {submitted === true ? (
+              <div className="mt-3 mb-3">
+                <strong>
+                  Your request has been successfully submitted. You can now find
+                  it in your <Link to="/profile">Profile</Link> or in
+                  <Link to="/categories"> Marketplace</Link>.
+                </strong>
+              </div>
+            ) : (
+              ""
+            )}
             <Form onSubmit={handleSubmit}>
               <Form.Group
                 className="mb-3"
@@ -117,7 +135,7 @@ export default function Request() {
                   value={request.service_name}
                   onChange={handleChange}
                   className="josefin-sans-300"
-                  maxlength="20"
+                  maxLength="20"
                 />
               </Form.Group>
               <Form.Group

@@ -15,6 +15,7 @@ import Page404 from "./pages/Page404";
 import NavBar from "./components/NavBar";
 import AuthContext from "./contexts/AuthContext";
 import RequireAuth from "./components/RequireAuth";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
@@ -33,60 +34,63 @@ function App() {
     signOut,
   };
   return (
-    <AuthContext.Provider value={authObject}>
-      <div>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+    <>
+      <AuthContext.Provider value={authObject}>
+        <div>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
 
-          <Route
-            path="/profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/request"
-            element={
-              <RequireAuth>
-                <Request />
-              </RequireAuth>
-            }
-          />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route
-            path="/details"
-            element={
-              <RequireAuth>
-                <Details />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/categories"
-            element={
-              <RequireAuth>
-                <Categories />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/chatbox"
-            element={
-              <RequireAuth>
-                <Chatbox />
-              </RequireAuth>
-            }
-          />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-      </div>
-    </AuthContext.Provider>
+            <Route
+              path="/profile"
+              element={
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/request"
+              element={
+                <RequireAuth>
+                  <Request />
+                </RequireAuth>
+              }
+            />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route
+              path="/details"
+              element={
+                <RequireAuth>
+                  <Details />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/categories"
+              element={
+                <RequireAuth>
+                  <Categories />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/chatbox"
+              element={
+                <RequireAuth>
+                  <Chatbox />
+                </RequireAuth>
+              }
+            />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </div>
+        <Footer />
+      </AuthContext.Provider>
+    </>
   );
 }
 
