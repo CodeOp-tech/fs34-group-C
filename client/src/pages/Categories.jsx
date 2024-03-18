@@ -46,7 +46,7 @@ export default function Categories() {
                 <Card.Body>
                   <Image
                     fluid
-                    className="icon mb-3"
+                    className="icon mb-3 d-flex align-items-center"
                     src={
                       type.category_name === "Household"
                         ? "https://cdni.iconscout.com/illustration/premium/thumb/house-cleaning-service-4715607-3932688.png"

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Card, Row, Col, Button, Image } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Button,
+  Image,
+  Form,
+} from "react-bootstrap";
 
 import "../App.css";
 import { useSearchParams, Link } from "react-router-dom";
@@ -28,6 +36,7 @@ export default function Jobs() {
       console.log(err);
     }
   };
+
   return (
     <>
       <Container>
