@@ -59,8 +59,9 @@ function App() {
             }
           />
           <Route path="/jobs" element={<Jobs />} />
+          
           <Route
-            path="/details"
+            path="/jobs/:id"
             element={
               <RequireAuth>
                 <Details />
