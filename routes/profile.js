@@ -5,20 +5,8 @@ require("dotenv").config();
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const models = require("../models");
 
-//Alys: get user information by id (for dashboard) - need to test with log in (before was :id)
-// router.get("/", userShouldBeLoggedIn, async function (req, res) {
-//   const { user_id } = req;
-//   try {
-//     //find the user using the primary key
-//     const user = await models.User.findByPk(user_id);
-//     //   const user = await models.User.findOne({ where: { id: id } });
-//     res.send(user);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
+// Get user information for profile dashboard
 
-// Ari trial
 router.get("/user", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   try {
@@ -26,47 +14,39 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
       attributes: ["email", "firstname", "lastname", "total_points"],
       where: { id: user_id },
     });
-    res.json(response);
+    res.send(response);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-// Alys - get all services for one user
-//question to self: shall we use this same endpoint and then map through them to show different keys - possibly yes
-
+// Get all the services that the user created
 router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   try {
-    const user = await models.User.findOne({
-      where: {
-        id: user_id,
-      },
+    const response = await models.Service.findAll({
+      where: { service_creator: user_id },
     });
-console.log(user)
-    const services = await user.getServices();
-    console.log(services);
-    res.json(services);
-    
+    res.send(response);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
-// router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
-//   const { id } = req;
-//   try {
-//     const response = await models.User.findOne({
-//       attributes: ["service_name"],
-//       where: { userId: id },
-//     });
-//     res.json(response);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// });
+//Get all the services the user is assigned to
+router.get("/myjobs", userShouldBeLoggedIn, async function (req, res) {
+  const { user_id } = req;
+  try {
+    const response = await models.Service.findAll({
+      where: { assigned_to: user_id },
+    });
+    res.send(response);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
-//Alys: add a new catagory/ user relationship - test this
+//Alys: NICE TO HAVE add a new catagory/ user relationship - test this
 
 // router.post("/:id/categories", async function (req, res){
 //   const { id } = req.params; //this will be just req when it works on login

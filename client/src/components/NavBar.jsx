@@ -22,12 +22,16 @@ export default function NavBar() {
               <Nav.Link as={Link} to="/about">
                 About
               </Nav.Link>
-              <Nav.Link as={Link} to="/categories">
-                Marketplace
-              </Nav.Link>
-              <Nav.Link as={Link} to="/request">
-                Request
-              </Nav.Link>
+              {isLoggedIn && (
+                <Nav.Link as={Link} to="/categories">
+                  Marketplace
+                </Nav.Link>
+              )}
+              {isLoggedIn && (
+                <Nav.Link as={Link} to="/request">
+                  Request
+                </Nav.Link>
+              )}
               <NavDropdown title="My Account" id="basic-nav-dropdown">
                 {!isLoggedIn && (
                   <NavDropdown.Item as={Link} to="/login">
