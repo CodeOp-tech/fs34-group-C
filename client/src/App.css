@@ -1,9 +1,16 @@
 body {
+  background-color: #f8f9fa;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
   background-color: #fff5cb;
 }
 
 .footer {
-  background: whitesmoke;
+  background: #f8f9fa;
   margin: 0px;
   position: static;
   bottom: 0px;
@@ -35,7 +42,7 @@ body {
 }
 .sacramento-regular {
   font-family: "Sacramento", cursive;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
 }
 

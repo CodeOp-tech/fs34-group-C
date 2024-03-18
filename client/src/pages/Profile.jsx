@@ -26,7 +26,7 @@ export default function Profile() {
     }
   }
 
-  //getting all of the service requests the user has made 
+  //getting all of the service requests the user has made
   async function getUserServices() {
     try {
       const response = await fetch("/api/profile/myservices", {
@@ -38,9 +38,9 @@ export default function Profile() {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
-   //getting all of the jobs the user is assigned to 
+  //getting all of the jobs the user is assigned to
   async function getUserJobs() {
     try {
       const response = await fetch("/api/profile/myjobs", {
@@ -54,14 +54,13 @@ export default function Profile() {
     }
   }
 
-
   //ensuring we see something when we click on the page
   useEffect(() => {
     getUserInfo();
   }, []);
 
   useEffect(() => {
-   getUserServices();
+    getUserServices();
   }, []);
 
   //button functions
@@ -70,11 +69,17 @@ export default function Profile() {
   const handleJobsClick = () => navigate("/Categories");
 
   return (
-    <div className="profile">
-      <h1 className="profile-title text-center pt-5 pb-3">Profile Page</h1>
 
-      <Container className="text-center pb-5">
-        <Row>
+    <div className="profile pt-5 pb-3">
+      <Container>
+        <Row className="m-5 justify-content-md-center">
+          <Col xs={12} md={6}>
+            <h1 className="welcome-title josefin-sans-400">Profile</h1>
+            <hr />
+          </Col>
+        </Row>
+        <Row className="text-center">
+
           <Col className="profile-container">
             <h3 className="m">Profile information</h3>
             <div className="image-container rounded-circle"></div>
@@ -86,7 +91,7 @@ export default function Profile() {
             <Button className="profile-button m-2">Update Information</Button>
           </Col>
         </Row>
-        <Row>
+        <Row className="text-center">
           <Col className="profile-container">
             <h3>My Service Requests</h3>
             <p>Upcoming service requests</p>
@@ -97,10 +102,9 @@ export default function Profile() {
             ))}
 
             <Button className="profile-button m-2" onClick={handleRequestClick}>
-            Create New Request
+              Create New Request
             </Button>
           </Col>
-
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
@@ -112,17 +116,15 @@ export default function Profile() {
             ))}
             <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
-              </Button>
+            </Button>
           </Col>
         </Row>
-        <Row>
+        <Row className="text-center">
           <Col className="profile-container">
             <h3>Points</h3>
             <p>Here is your current point score:</p>
             <h4>{userInfo.total_points}</h4>
-            <Button className="profile-button m-2">
-              Get Rewards
-              </Button>
+            <Button className="profile-button m-2">Get Rewards</Button>
           </Col>
         </Row>
       </Container>

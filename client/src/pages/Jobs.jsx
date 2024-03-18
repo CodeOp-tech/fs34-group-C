@@ -38,15 +38,15 @@ export default function Jobs() {
   };
 
   return (
-    <>
+    <div className="profile pt-5 pb-3">
       <Container>
-        <Row className="mt-5 mr-5 ml-5 justify-content-md-center ">
+        <Row className="m-5 justify-content-md-center">
           <Col xs={12} md={6}>
-            <div className="sacramento-regular welcome-title justify-content-md-center">
-              Marketplace
+            <div className="welcome-title justify-content-md-center josefin-sans-400">
+              Market
             </div>
             <hr />
-            <div className="josefin-sans-300 mt-4 mb-4">
+            <div className="josefin-sans-300 mt-4">
               Browse through the listed service requests and find a match!
               Please make sure to check your availability with the listed hiring
               date. Once you accept a job, it will automatically be assigned to
@@ -55,6 +55,64 @@ export default function Jobs() {
           </Col>
         </Row>
 
+        <Form className="mb-4 josefin-sans-300">
+          <Row className="justify-content-center">
+            <Col xs={6} md={3}>
+              <Form.Group>
+                <Form.Label>
+                  <strong>Filter by </strong>
+                </Form.Label>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={3}>
+              <Form.Group></Form.Group>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col xs={6} md={3}>
+              <Form.Group>
+                <Form.Label>Points</Form.Label>
+                <Form.Select
+                  name="points"
+                  id="points"
+                  className="josefin-sans-300"
+                  value={servicesByCat.points}
+                  // onChange={handleChange}
+                >
+                  <option placeholder="points">Min amount of points</option>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>30</option>
+                  <option>40</option>
+                  <option>50+</option>
+                  <option>100+</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={3}>
+              <Form.Group>
+                <Form.Label>Duration</Form.Label>
+                <Form.Select
+                  name="time_required"
+                  id="time_required"
+                  className="josefin-sans-300"
+                  value={servicesByCat.time_required}
+                  // onChange={handleChange}
+                >
+                  <option placeholder="time_required">
+                    Max amount of duration
+                  </option>
+                  <option>1 hour</option>
+                  <option>2 hours</option>
+                  <option>3 hours</option>
+                  <option>4 hours</option>
+                  <option>5 hours</option>
+                  <option>10 hours</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          </Row>
+        </Form>
         {/* Mapping through all my Jobs per given Category and displaying info about them */}
         <Row className="mr-5 ml-5 justify-content-md-center ">
           {servicesByCat.map((service) => (
@@ -87,6 +145,6 @@ export default function Jobs() {
           ))}
         </Row>
       </Container>
-    </>
+    </div>
   );
 }

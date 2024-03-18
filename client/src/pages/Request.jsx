@@ -98,21 +98,19 @@ export default function Request() {
   }
 
   return (
-    <>
-      <Container className="mb-4">
-        <Row className="justify-content-md-center josefin-sans-300">
-          <Col xs lg="6">
-            <div className="sacramento-regular request-title">
-              New job request
-            </div>
-            <div>
+    <div className="profile pt-5 pb-3">
+      <Container>
+        <Row className="m-5 justify-content-md-center">
+          <Col xs={12} md={6}>
+            <div className="welcome-title josefin-sans-400">Request</div>
+            <hr />
+            <div className="josefin-sans-300 mb-4">
               Please fill in the form according to your request.
               <br />
               Submit and send your request to Marketplace.
-              <hr />
             </div>
             {submitted === true ? (
-              <div className="mt-3 mb-3">
+              <div className="mt-4 mb-4 josefin-sans-300">
                 <strong>
                   Your request has been successfully submitted. You can now find
                   it in your <Link to="/profile">Profile</Link> or in
@@ -122,7 +120,7 @@ export default function Request() {
             ) : (
               ""
             )}
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="josefin-sans-300">
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
@@ -174,6 +172,7 @@ export default function Request() {
                 <Form.Label>Duration (in hours):</Form.Label>
                 <Form.Control
                   type="number"
+                  min="1"
                   name="time_required"
                   value={request.time_required}
                   onChange={handleChange}
@@ -188,8 +187,8 @@ export default function Request() {
                 <Form.Control
                   type="number"
                   name="points"
-                  min="1"
-                  value={request.points}
+                  min="10"
+                  value={request.time_required * 10}
                   onChange={handleChange}
                   className="josefin-sans-300"
                 />
@@ -219,6 +218,6 @@ export default function Request() {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 }

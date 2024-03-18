@@ -15,7 +15,7 @@ export default function Home() {
       <Container>
         <Row className="m-5 justify-content-md-center">
           <Col xs={12} md={6}>
-            <div className="sacramento-regular welcome-title ">
+            <div className="sacramento-regular welcome-title">
               Share time,
               <br />
               share love

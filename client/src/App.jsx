@@ -36,13 +36,16 @@ function App() {
   return (
     <>
       <AuthContext.Provider value={authObject}>
-        <div>
+        <div className="wrapper">
           <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+          <div></div>
+          <div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+
 
           <Route
             path="/profile"
@@ -92,6 +95,7 @@ function App() {
     </AuthContext.Provider>
 
             
+
   );
 }
 
