@@ -35,17 +35,32 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
 // Alys - get all services for one user
 //question to self: shall we use this same endpoint and then map through them to show different keys - possibly yes
 
+router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
+  const { user_id } = req;
+  try {
+    const user = await models.User.findOne({
+      where: {
+        id: user_id,
+      },
+    });
+console.log(user)
+    const services = await user.getServices();
+    console.log(services);
+    res.json(services);
+    
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // router.get("/myservices", userShouldBeLoggedIn, async function (req, res) {
 //   const { id } = req;
 //   try {
-//     models.User.findOne({
-//       where: {
-//         id,
-//       },
+//     const response = await models.User.findOne({
+//       attributes: ["service_name"],
+//       where: { userId: id },
 //     });
-
-//     const services = await user.getServices();
-//     res.send(services);
+//     res.json(response);
 //   } catch (error) {
 //     res.status(500).send(error);
 //   }

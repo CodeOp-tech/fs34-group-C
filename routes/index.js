@@ -39,6 +39,19 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 });
 
 
+// // Jana GET all categorie names
+// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
+//   try {
+//     const response = await models.Category.findAll({
+//       attributes: ["category_name"],
+//     });
+//     res.send(response);
+//     // res.send({ title: "Express" });
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+
 // Get all jobs by a certain Category ID (Jana)
 router.get("/services", async function (req, res) {
   try {
@@ -52,6 +65,20 @@ router.get("/services", async function (req, res) {
     res.status(500).send(err);
   }
 });
+
+
+// // Jana GET all categorie names
+// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
+//   try {
+//     const response = await models.Category.findAll({
+//       attributes: ["category_name"],
+//     });
+//     res.send(response);
+//     // res.send({ title: "Express" });
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
 
 
 // Ari GET categories, select * from categories
