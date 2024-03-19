@@ -42,7 +42,7 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
 // Get all jobs by a certain Category ID, amount of points and time_required (for Filtering) (Jana)
 router.get("/services", userShouldBeLoggedIn, async function (req, res) {
   try {
-    const { category, points, time_required } = req.query;
+    const { category, points, time_required, date } = req.query;
 
     // creating an object that gets built depending on what gets sent through req.quere
     // and that later gets sent into the "where" of my fetch request
@@ -59,6 +59,12 @@ router.get("/services", userShouldBeLoggedIn, async function (req, res) {
       query.time_required = {
         [Op.lte]: time_required,
       };
+
+    // if max-date gets filtered, we add a property .date to query and define it as findAll less than or equal (lte) a date
+    // if (date)
+    //   query.date = {
+    //     [Op.lte]: date,
+    //   };
 
     // fetching my data according to what I have in my query object aka what I get from my req.quere
     const response = await models.Service.findAll({
@@ -84,19 +90,6 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
     res.status(500).send(err);
   }
 });
-
-// // Jana GET all categorie names
-// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
-//   try {
-//     const response = await models.Category.findAll({
-//       attributes: ["category_name"],
-//     });
-//     res.send(response);
-//     // res.send({ title: "Express" });
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
 
 // Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {
