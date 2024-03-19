@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 require("dotenv").config();
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const models = require("../models");
+const { Op } = require("sequelize");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -38,26 +39,30 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
-
-// // Jana GET all categorie names
-// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
-//   try {
-//     const response = await models.Category.findAll({
-//       attributes: ["category_name"],
-//     });
-//     res.send(response);
-//     // res.send({ title: "Express" });
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
-
-// Get all jobs by a certain Category ID (Jana)
+// Get all jobs by a certain Category ID, amount of points and time_required (for Filtering) (Jana)
 router.get("/services", userShouldBeLoggedIn, async function (req, res) {
   try {
-    const { category } = req.query;
+    const { category, points, time_required } = req.query;
+
+    // creating an object that gets built depending on what gets sent through req.quere
+    // and that later gets sent into the "where" of my fetch request
+    let query = { CategoryId: category };
+    // if points gets filtered, we add a property .points to query and define it as findAll greater than or equal (gte) a value
+
+    if (points)
+      query.points = {
+        [Op.gte]: points,
+      };
+
+    // if time_required gets filtered, we add a property .time_required to query and define it as findAll less than or equal (lte) a value
+    if (time_required)
+      query.time_required = {
+        [Op.lte]: time_required,
+      };
+
+    // fetching my data according to what I have in my query object aka what I get from my req.quere
     const response = await models.Service.findAll({
-      where: { CategoryId: category },
+      where: query,
     });
     console.log(response);
     res.send(response);
@@ -80,7 +85,6 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
-
 // // Jana GET all categorie names
 // router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
 //   try {
@@ -93,7 +97,6 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
 //     res.status(500).send(err);
 //   }
 // });
-
 
 // Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {

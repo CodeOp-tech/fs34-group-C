@@ -14,8 +14,18 @@ import { useSearchParams, Link } from "react-router-dom";
 
 export default function Jobs() {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // variable that gets defined via the search params in the url
   const category = searchParams.get("category");
+
+  // useState for sending data from fetch request to front end
   const [servicesByCat, setServicesByCat] = useState([]);
+
+  // useState for Input that gets defined by filter
+  const [input, setInput] = useState({
+    points: "",
+    time_required: "",
+  });
 
   useEffect(() => {
     getJobsByCategory();
@@ -23,18 +33,47 @@ export default function Jobs() {
 
   // get All Jobs listed under a certain Category Id (which is given to me by usesearchParams)
   const getJobsByCategory = async () => {
+    console.log(input.points);
+    console.log(input.time_required);
+    console.log(category);
     try {
-      const response = await fetch(`api/index/services?category=${category}`, {
-        method: "GET",
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      const response = await fetch(
+        `/api/index/services?category=${category}&points=${input.points}&time_required=${input.time_required}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
       const data = await response.json();
+      console.log(data);
       setServicesByCat(data);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleChange = (event) => {
+    if (event.target.value !== "") {
+      setInput((state) => ({
+        ...state,
+        [event.target.name]: event.target.value,
+      }));
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("hello");
+    getJobsByCategory();
+  };
+
+  const reset = () => {
+    setInput({
+      points: "",
+      time_required: "",
+    });
   };
 
   return (
@@ -54,10 +93,10 @@ export default function Jobs() {
             </div>
           </Col>
         </Row>
-
-        <Form className="mb-4 josefin-sans-300">
+        {/* ******************************************************************************************************** */}
+        <Form className="mb-4 josefin-sans-300" onSubmit={handleSubmit}>
           <Row className="justify-content-center">
-            <Col xs={6} md={3}>
+            <Col xs={6} md={2}>
               <Form.Group>
                 <Form.Label>
                   <strong>Filter by </strong>
@@ -67,37 +106,43 @@ export default function Jobs() {
             <Col xs={6} md={3}>
               <Form.Group></Form.Group>
             </Col>
+            <Col xs={6} md={3}>
+              <Form.Group></Form.Group>
+            </Col>
           </Row>
           <Row className="justify-content-center">
             <Col xs={6} md={3}>
               <Form.Group>
-                <Form.Label>Points</Form.Label>
+                {/* <Form.Label>Points</Form.Label> */}
                 <Form.Select
                   name="points"
                   id="points"
                   className="josefin-sans-300"
-                  value={servicesByCat.points}
-                  // onChange={handleChange}
+                  value={input.points}
+                  onChange={handleChange}
                 >
                   <option placeholder="points">Min amount of points</option>
                   <option>10</option>
                   <option>20</option>
                   <option>30</option>
                   <option>40</option>
-                  <option>50+</option>
-                  <option>100+</option>
+                  <option>50</option>
+                  <option>100</option>
+                  <option>200</option>
                 </Form.Select>
               </Form.Group>
             </Col>
-            <Col xs={6} md={3}>
+            {/* ******************************************************************* */}
+
+            <Col xs={6} md={3} className="">
               <Form.Group>
-                <Form.Label>Duration</Form.Label>
+                {/* <Form.Label>Duration</Form.Label> */}
                 <Form.Select
                   name="time_required"
                   id="time_required"
                   className="josefin-sans-300"
-                  value={servicesByCat.time_required}
-                  // onChange={handleChange}
+                  value={input.time_required}
+                  onChange={handleChange}
                 >
                   <option placeholder="time_required">
                     Max amount of duration
@@ -111,8 +156,34 @@ export default function Jobs() {
                 </Form.Select>
               </Form.Group>
             </Col>
+            {/* ******************************************************************* */}
+
+            <Col xs={6} md={2}>
+              {/* <Form.Label></Form.Label> */}
+              <Button
+                type="submit"
+                className="filter-button josefin-sans-400 mt-2"
+              >
+                Filter
+              </Button>
+            </Col>
+            {/* ******************************************************************* */}
+            <Col xs={6} md={1}>
+              {/* <Form.Label></Form.Label> */}
+              <Button
+                type="submit"
+                className="filter-button josefin-sans-400 mt-2"
+                onClick={reset}
+              >
+                Reset
+              </Button>
+            </Col>
+
+            {/* ******************************************************************* */}
           </Row>
         </Form>
+        {/* ******************************************************************************************************** */}
+
         {/* Mapping through all my Jobs per given Category and displaying info about them */}
         <Row className="mr-5 ml-5 justify-content-md-center ">
           {servicesByCat.map((service) => (
@@ -128,16 +199,16 @@ export default function Jobs() {
                       2
                     )}.${service.date.substr(0, 4)}`}
                   </Card.Text>
+                  <Card.Text>Duration: {service.time_required} hours</Card.Text>
                   <Card.Text>Points to earn: {service.points}</Card.Text>
                   <Card.Text className="overflow">
-                    {service.service_description}
+                    <em> {service.service_description}</em>
                   </Card.Text>
 
                   <Link to={`/jobs/${service.id}`}>
-                  <Button
-                    className="button josefin-sans-400 mt-2">
-                    Details
-                  </Button>
+                    <Button className="button josefin-sans-400 mt-2">
+                      Details
+                    </Button>
                   </Link>
                 </Card.Body>
               </Card>

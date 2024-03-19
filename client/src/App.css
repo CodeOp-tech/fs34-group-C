@@ -25,6 +25,14 @@ body {
   border: 1.9px solid rgb(97, 96, 96);
 }
 
+.filter-button {
+  background-color: #e2edf1;
+  color: rgb(97, 96, 96);
+  border-radius: 20px;
+  padding: 6px 20px;
+  border: 1.9px solid rgb(97, 96, 96);
+}
+
 .welcome-title {
   font-size: 100px;
   line-height: 80px;
