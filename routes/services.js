@@ -80,19 +80,29 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
+//getting the creator of a service (not going well) (Alys)
+router.get("/details/:id/creator", userShouldBeLoggedIn, async function (req, res) {
+  try {
+   //i have the service in the req params
+    //i want the creator of this service 
+    //find the service
+   const { id } = req.params;
+   const service = await models.Service.findOne({
+     where: { id: id 
+    },
+    include: models.User
+   });
 
-// // Jana GET all categorie names
-// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
-//   try {
-//     const response = await models.Category.findAll({
-//       attributes: ["category_name"],
-//     });
-//     res.send(response);
-//     // res.send({ title: "Express" });
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
+  // const response = service.service_creator
+
+    console.log(response);
+    res.send(service);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//create 'assigned-to' assocation when user accepts a job (Alys)
 
 
 // Ari GET categories, select * from categories
@@ -105,6 +115,6 @@ router.get("/types", async function (req, res, next) {
   }
 });
 
-//Alys GET all info of one job by id
+
 
 module.exports = router;
