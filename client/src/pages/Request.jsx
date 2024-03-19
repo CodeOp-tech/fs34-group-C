@@ -44,7 +44,7 @@ export default function Request() {
   // Storing my categories from the database in my file
   const getCategories = async () => {
     try {
-      const response = await fetch(`/api/index/types`, {
+      const response = await fetch(`/api/services/types`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -80,7 +80,7 @@ export default function Request() {
   async function sendRequest() {
     // POST request into database
     try {
-      const response = await fetch(`/api/index/services`, {
+      const response = await fetch(`/api/services/services`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

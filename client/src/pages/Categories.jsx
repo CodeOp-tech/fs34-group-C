@@ -9,8 +9,8 @@ export default function Categories() {
 
   const fectchTypes = async () => {
     try {
-      const response = await axios.get("/api/index/types");
-      console.log(response);
+      const response = await axios.get("/api/services/types");
+      // console.log(response);
       setTypes(response.data);
     } catch (error) {
       console.error("Error fetching rankings:", error);
