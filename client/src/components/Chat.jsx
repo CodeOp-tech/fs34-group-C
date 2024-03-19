@@ -68,12 +68,9 @@ export default function Chat() {
     <div className="d-flex flex-column h-100">
       <div className="flex-grow-1 p-3">
         {messages.map((message, i) => (
-          <div
-            key={i}
-            className={message.sender_id ? "text-end" : "text-start"}
-          >
+          <div key={i}>
             <span className={message.sender_id ? "text-end" : "text-start"}>
-              {message.text}
+              {message.sender_id} {message.text}
             </span>
           </div>
         ))}
