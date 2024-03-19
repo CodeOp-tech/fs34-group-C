@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Container, Button, Row, Col, Image } from "react-bootstrap";
 
 export default function Profile() {
@@ -55,18 +55,16 @@ export default function Profile() {
   }
 
   //ensuring we see something when we click on the page
-  useEffect(() => {
-    getUserInfo();
-  }, []);
 
   useEffect(() => {
-    getUserServices();
+    getUserInfo(); getUserServices(); getUserJobs();
   }, []);
 
   //button functions
   const navigate = useNavigate();
   const handleRequestClick = () => navigate("/Request");
   const handleJobsClick = () => navigate("/Categories");
+  const handleRewardsClick = () =>  alert("Coming Soon!");
 
   return (
 
@@ -96,9 +94,11 @@ export default function Profile() {
             <h3>My Service Requests</h3>
             <p>Upcoming service requests</p>
             {userServices.map((userService, i) => (
+               <Link to={`/jobs/${userService.id}`}>
               <h5 className="mt-2" key={i}>
                 {userService.service_name}
               </h5>
+               </Link>
             ))}
 
             <Button className="profile-button m-2" onClick={handleRequestClick}>
@@ -109,11 +109,14 @@ export default function Profile() {
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
             <p>Upcoming jobs</p>
+  
             {userJobs.map((userJob, i) => (
+               <Link to={`/jobs/${userJob.id}`}>
               <h5 className="mt-2" key={i}>
                 {userJob.service_name}
               </h5>
-            ))}
+              </Link>
+            ))};
             <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
             </Button>
@@ -124,7 +127,7 @@ export default function Profile() {
             <h3>Points</h3>
             <p>Here is your current point score:</p>
             <h4>{userInfo.total_points}</h4>
-            <Button className="profile-button m-2">Get Rewards</Button>
+            <Button className="profile-button m-2" onClick={handleRewardsClick}>Get Rewards</Button>
           </Col>
         </Row>
       </Container>
