@@ -26,6 +26,14 @@ body {
 }
 
 .filter-button {
+  background-color: white;
+  color: rgb(97, 96, 96);
+  border-radius: 20px;
+  padding: 6px 20px;
+  border: 1.9px solid rgb(97, 96, 96);
+}
+
+.filter-button:hover {
   background-color: #e2edf1;
   color: rgb(97, 96, 96);
   border-radius: 20px;
@@ -43,7 +51,6 @@ body {
 }
 .img {
   border-radius: 10%;
-  /* border: 2px solid black; */
   padding: 0px;
   margin-left: 10px;
   width: 400px;
@@ -76,10 +83,7 @@ body {
 }
 
 .icon {
-  /* background-color: whitesmoke; */
-  /* border-radius: 10px; */
   height: 200px;
-  /* border: 1px solid rgb(115, 113, 113); */
 }
 
 .profile {
