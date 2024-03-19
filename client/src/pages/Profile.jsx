@@ -116,7 +116,7 @@ export default function Profile() {
                 {userJob.service_name}
               </h5>
               </Link>
-            ))};
+            ))}
             <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
             </Button>
