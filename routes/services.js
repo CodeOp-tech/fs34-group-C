@@ -66,7 +66,7 @@ router.get("/services", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
-// Get all information from one service by ID (Alys) - working 18/03
+// Get all information from one service by ID - working 18/03
 router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
   try {
     const { id } = req.params;
@@ -80,20 +80,58 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
-
-// // Jana GET all categorie names
-// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
+//getting the creator of a service (not going well) (Alys)
+// router.get("/details/:id/creator", userShouldBeLoggedIn, async function (req, res) {
 //   try {
-//     const response = await models.Category.findAll({
-//       attributes: ["category_name"],
-//     });
-//     res.send(response);
-//     // res.send({ title: "Express" });
+//    //i have the service in the req params
+//     //i want the creator of this service 
+//     //find the service
+//    const { id } = req.params;
+//    const service = await models.Service.findOne({
+//      where: { id: id 
+//     },
+//    });
+
+//   // const user = await models.User.findOne({ 
+//   //   where: { id: service.creator
+//   //   }
+//   // })
+
+//   // const user = await service.getCreator();
+
+//     console.log(response);
+//     res.send(service);
 //   } catch (err) {
 //     res.status(500).send(err);
 //   }
 // });
 
+//create 'assigned-to' assocation when user accepts a job 
+router.post("/details/:service_id/assigned", userShouldBeLoggedIn, async function (req, res){
+    const { service_id } = req.params; 
+    const { user_id } = req;
+    try {
+    const user = await models.User.findOne({
+      where: {
+        id: user_id
+      },
+    });
+  
+  const service = await models.Service.findOne({
+    where: {
+      id: service_id,
+    },
+  });
+
+  //want to also get the points from service and add them to the user points but :(
+
+    await service.setAssignedTo(user); //so you need to use the alias that's in the model for service, you were close!
+    res.send(service);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+  
+  });
 
 // Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {
@@ -105,6 +143,6 @@ router.get("/types", async function (req, res, next) {
   }
 });
 
-//Alys GET all info of one job by id
+
 
 module.exports = router;

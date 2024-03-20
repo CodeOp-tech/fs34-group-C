@@ -44,7 +44,7 @@ export default function Request() {
   // Storing my categories from the database in my file
   const getCategories = async () => {
     try {
-      const response = await fetch(`/api/index/types`, {
+      const response = await fetch(`/api/services/types`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -80,7 +80,7 @@ export default function Request() {
   async function sendRequest() {
     // POST request into database
     try {
-      const response = await fetch(`/api/index/services`, {
+      const response = await fetch(`/api/services/services`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,6 +134,7 @@ export default function Request() {
                   onChange={handleChange}
                   className="josefin-sans-300"
                   maxLength="20"
+                  required
                 />
               </Form.Group>
               <Form.Group
@@ -148,6 +149,7 @@ export default function Request() {
                   value={request.service_description}
                   onChange={handleChange}
                   className="josefin-sans-300"
+                  required
                 />
               </Form.Group>
               <Form.Group
@@ -162,6 +164,7 @@ export default function Request() {
                   onChange={handleChange}
                   className="josefin-sans-300"
                   min="2024-03-14"
+                  required
                 />
               </Form.Group>
 
@@ -177,6 +180,7 @@ export default function Request() {
                   value={request.time_required}
                   onChange={handleChange}
                   className="josefin-sans-300"
+                  required
                 />
               </Form.Group>
               <Form.Group
@@ -191,6 +195,7 @@ export default function Request() {
                   value={request.time_required * 10}
                   onChange={handleChange}
                   className="josefin-sans-300"
+                  required
                 />
               </Form.Group>
               <Form.Label>Job category:</Form.Label>
@@ -200,6 +205,7 @@ export default function Request() {
                 className="josefin-sans-300"
                 value={request.CategoryId}
                 onChange={handleChange}
+                required
               >
                 <option placeholder="choose Job Category">
                   Select Job Category
@@ -211,7 +217,7 @@ export default function Request() {
                 ))}
               </Form.Select>
 
-              <Button className="button mt-3 mb-4" type="submit">
+              <Button className="button mt-4" type="submit">
                 Submit
               </Button>
             </Form>

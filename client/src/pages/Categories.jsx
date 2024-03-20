@@ -9,8 +9,8 @@ export default function Categories() {
 
   const fectchTypes = async () => {
     try {
-      const response = await axios.get("/api/index/types");
-      console.log(response);
+      const response = await axios.get("/api/services/types");
+      // console.log(response);
       setTypes(response.data);
     } catch (error) {
       console.error("Error fetching rankings:", error);
@@ -78,37 +78,6 @@ export default function Categories() {
           </Row>
         </Container>
       </div>
-
-      {/* Placeholder / ideas for icons:
-      <Image
-        className="icon"
-        
-        src="https://cdni.iconscout.com/illustration/premium/thumb/house-cleaning-service-4715607-3932688.png"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/tech-support-6992603-5699712.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/babysitter-or-mother-and-baby-girl-playing-with-toy-cubes-at-home-2931948-2463796.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://americare-v1709151372.websitepro-cdn.com/wp-content/uploads/2022/01/ameriCARE_RunningErrands_Illustration.png"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/craftsman-7281822-5950629.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://cdni.iconscout.com/illustration/premium/thumb/delivery-boy-3012842-2627456.png?f=webp"
-      ></Image>
-      <Image
-        className="icon"
-        src="https://www.pngfind.com/pngs/b/509-5092285_last-mile-delivery-delivery-van-car-cartoon-hd.png"
-      ></Image> */}
     </>
   );
 }
