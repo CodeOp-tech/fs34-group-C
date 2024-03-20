@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import { useNavigate } from "react-router-dom";
 
 export default function Request() {
   // Creating todays date for the date input field min-value
@@ -63,9 +62,10 @@ export default function Request() {
   }
 
   // When the form is submitted, the function to send the request to the backend gets called
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    sendRequest();
+    // if (event.target.value !== "none") {
+    await sendRequest();
     setRequest({
       service_name: "",
       service_description: "",
@@ -74,6 +74,10 @@ export default function Request() {
       points: 1,
       CategoryId: 0,
     });
+    // } else {
+    //   console.log("doesn't work");
+    //   alert("nope");
+    // }
   }
 
   // SEND my request to the backend
@@ -88,13 +92,11 @@ export default function Request() {
         },
         body: JSON.stringify(request),
       });
-      // alert("New job submitted");
       console.log("New job request was submitted!");
     } catch (err) {
       console.log(err.message);
     }
     setSubmitted(true);
-    // navigate("/categories");
   }
 
   return (
@@ -191,8 +193,8 @@ export default function Request() {
                 <Form.Control
                   type="number"
                   name="points"
-                  min="10"
-                  value={request.time_required * 10}
+                  min={request.time_required * 10}
+                  value={request.points}
                   onChange={handleChange}
                   className="josefin-sans-300"
                   required
@@ -207,7 +209,13 @@ export default function Request() {
                 onChange={handleChange}
                 required
               >
-                <option placeholder="choose Job Category">
+                <option
+                  placeholder="choose Job Category"
+                  value="none"
+                  // selected
+                  // hidden
+                  // disabled
+                >
                   Select Job Category
                 </option>
                 {categories.map((category) => (

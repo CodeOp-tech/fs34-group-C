@@ -131,3 +131,17 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.status-assigned-button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.status-free-button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
