@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-
 export default function Details() {
   const [jobDetails, setJobDetails] = useState({});
   const [assigned, setAssigned] = useState(false);

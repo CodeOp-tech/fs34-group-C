@@ -16,6 +16,7 @@ import NavBar from "./components/NavBar";
 import AuthContext from "./contexts/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import Footer from "./components/Footer";
+import Chat from "./components/Chat";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
@@ -81,13 +82,22 @@ function App() {
                 }
               />
               <Route
-                path="/chatbox"
+                path="/chat"
                 element={
                   <RequireAuth>
                     <Chatbox />
                   </RequireAuth>
                 }
-              />
+              >
+                <Route
+                  path=":id"
+                  element={
+                    <RequireAuth>
+                      <Chat />
+                    </RequireAuth>
+                  }
+                />
+              </Route>
               <Route path="*" element={<Page404 />} />
             </Routes>
           </div>
