@@ -38,20 +38,6 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
   }
 });
 
-
-// // Jana GET all categorie names
-// router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
-//   try {
-//     const response = await models.Category.findAll({
-//       attributes: ["category_name"],
-//     });
-//     res.send(response);
-//     // res.send({ title: "Express" });
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
-
 // Get all jobs by a certain Category ID (Jana)
 router.get("/services", userShouldBeLoggedIn, async function (req, res) {
   try {
@@ -84,15 +70,15 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
 // router.get("/details/:id/creator", userShouldBeLoggedIn, async function (req, res) {
 //   try {
 //    //i have the service in the req params
-//     //i want the creator of this service 
+//     //i want the creator of this service
 //     //find the service
 //    const { id } = req.params;
 //    const service = await models.Service.findOne({
-//      where: { id: id 
+//      where: { id: id
 //     },
 //    });
 
-//   // const user = await models.User.findOne({ 
+//   // const user = await models.User.findOne({
 //   //   where: { id: service.creator
 //   //   }
 //   // })
@@ -106,32 +92,35 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
 //   }
 // });
 
-//create 'assigned-to' assocation when user accepts a job 
-router.post("/details/:service_id/assigned", userShouldBeLoggedIn, async function (req, res){
-    const { service_id } = req.params; 
+//create 'assigned-to' assocation when user accepts a job
+router.post(
+  "/details/:service_id/assigned",
+  userShouldBeLoggedIn,
+  async function (req, res) {
+    const { service_id } = req.params;
     const { user_id } = req;
     try {
-    const user = await models.User.findOne({
-      where: {
-        id: user_id
-      },
-    });
-  
-  const service = await models.Service.findOne({
-    where: {
-      id: service_id,
-    },
-  });
+      const user = await models.User.findOne({
+        where: {
+          id: user_id,
+        },
+      });
 
-  //want to also get the points from service and add them to the user points but :(
+      const service = await models.Service.findOne({
+        where: {
+          id: service_id,
+        },
+      });
 
-    await service.setAssignedTo(user); //so you need to use the alias that's in the model for service, you were close!
-    res.send(service);
-  } catch (error) {
-    res.status(500).send(error);
+      //want to also get the points from service and add them to the user points but :(
+
+      await service.setAssignedTo(user); //so you need to use the alias that's in the model for service, you were close!
+      res.send(service);
+    } catch (error) {
+      res.status(500).send(error);
+    }
   }
-  
-  });
+);
 
 // Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {
@@ -142,7 +131,5 @@ router.get("/types", async function (req, res, next) {
     res.status(500).send(error);
   }
 });
-
-
 
 module.exports = router;
