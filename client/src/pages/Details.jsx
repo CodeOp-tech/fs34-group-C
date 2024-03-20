@@ -128,33 +128,7 @@ export default function Details() {
             </div>
           </Col>
         </Row>
-        Styling Option 1:
-        <Row className="justify-content-md-center">
-          <Col className="profile-container ">
-            <div className="m  josefin-sans-400 fs-5">Service Description</div>
-            <div className="mt-2  josefin-sans-300">
-              {jobDetails.service_description}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="profile-container">
-            <div className="m  josefin-sans-400 fs-5">Service Date</div>
-            <div className="mt-2  josefin-sans-300">{formattedDate}</div>
-          </Col>
-          <Col className="profile-container">
-            <div className="m  josefin-sans-400 fs-5">Length of service</div>
-            <div className="mt-2  josefin-sans-300">
-              {jobDetails.time_required} hours
-            </div>
-          </Col>
-          <Col className="profile-container">
-            <div className="m  josefin-sans-400 fs-5">Points Available</div>
-            <div className="mt-2  josefin-sans-300">{jobDetails.points}</div>
-          </Col>
-        </Row>
-        <br />
-        Styling Option 2:
+  
         <Row className="justify-content-md-center">
           <Col className=" ">
             <Card className="mb-4">
@@ -224,6 +198,13 @@ export default function Details() {
         {creator.id === loggedinUser.id ? (
           <div className="josefin-sans-300 mt-2 mb-4">
             <strong>You cannot accept your own job assignment!</strong>
+          </div>
+        ) : (
+          ""
+        )}
+          {jobDetails.assigned_to === loggedinUser.id ? (
+          <div className="josefin-sans-300 mt-2 mb-4">
+            <strong>You've been assigned this job!</strong>
           </div>
         ) : (
           ""
