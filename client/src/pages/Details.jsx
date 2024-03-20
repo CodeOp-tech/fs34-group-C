@@ -1,19 +1,31 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 
 export default function Details() {
   const [jobDetails, setJobDetails] = useState({});
-  const [assigned, setAssigned] = useState(false);
-  const [creator, setCreator] = useState({});
   const [loggedinUser, setLoggedinUser] = useState({});
-  const [creatorIsUser, setCreatorIsUser] = useState(false);
-  const { id } = useParams()
+  const [creator, setCreator] = useState({});
+  const { id } = useParams();
+  const formattedDate = jobDetails.date;
+  // `${jobDetails.date.substr(
+  //   8,
+  //   2
+  // )}.${jobDetails.date.substr(5, 2)}.${jobDetails.date.substr(0, 4)}`;
+
+  // const [assigned, setAssigned] = useState(false);
+  // const [creatorIsUser, setCreatorIsUser] = useState(false);
 
   useEffect(() => {
-    getDetails(); getCreator(); getLoggedinUser(); isUserCreator();
+    getDetails();
+    getCreator();
+    getLoggedinUser();
   }, []);
+
+  useEffect(() => {
+    getDetails();
+  }, [jobDetails.assigned_to]);
 
   const getDetails = async () => {
     try {
@@ -41,8 +53,11 @@ export default function Details() {
       const data = await response.json();
     } catch (err) {
       console.log(err);
-    } setAssigned(true);
-    console.log(assigned)
+    }
+    setJobDetails((state) => ({
+      ...state,
+      ["assigned_to"]: loggedinUser.id,
+    }));
   };
 
   const getCreator = async () => {
@@ -76,65 +91,142 @@ export default function Details() {
     }
   };
 
-  function isUserCreator () {
-    console.log(creator.id)
-    console.log(loggedinUser.id)
-    if (creator.id === loggedinUser.id) {
-      setCreatorIsUser(true); 
-    } setCreatorIsUser(false);
-  }
-
   function handleClick(event) {
     event.preventDefault();
-    assignJob()
-  };
+    assignJob();
+  }
 
-  console.log(creatorIsUser)
   return (
-  <div>
-  <div className="welcome-title josefin-sans-400">
-  {jobDetails.service_name}
+    <div className=" pt-5 pb-3">
+      <Container>
+        <Row className="m-5 justify-content-md-center">
+          <Col xs={12} md={6}>
+            <div className="welcome-title josefin-sans-400">
+              {jobDetails.service_name}
+
+              <hr />
             </div>
-            <p className="josefin-sans-300 mt-4 mb-4">Request made by {creator.firstname} {creator.lastname}</p>
-            <p className="josefin-sans-300 mt-4 mb-4"> Assigned Status: {assigned === true ? "Already assigned" : "Job available" }</p>
-            <Container>
-            <Row>
-          <Col className="profile-container">
-            <h3 className="m">Service Description</h3>
-            <h6 className="mt-2">
+            <p className="josefin-sans-300 mt-4">
+              <strong>Request made by: </strong>user with id {creator.id} and
+              name {creator.firstname} {creator.lastname}
+            </p>
+            {jobDetails.assigned_to ? (
+              <p className="josefin-sans-300 ">
+                <strong>The job is assigned to: </strong> user_id{" "}
+                {jobDetails.assigned_to}
+              </p>
+            ) : (
+              <p className="josefin-sans-300 ">
+                <strong>Job status: </strong>available
+              </p>
+            )}
+            <p className="josefin-sans-300 ">
+              <em>
+                <strong>You are:</strong> {loggedinUser.id} /{" "}
+                {loggedinUser.firstname} {loggedinUser.lastname}
+              </em>
+            </p>
+          </Col>
+        </Row>
+        Styling Option 1:
+        <Row className="justify-content-md-center">
+          <Col className="profile-container ">
+            <div className="m  josefin-sans-400 fs-5">Service Description</div>
+            <div className="mt-2  josefin-sans-300">
               {jobDetails.service_description}
-            </h6>
+            </div>
           </Col>
         </Row>
         <Row>
           <Col className="profile-container">
-            <h3 className="m">Service Date</h3>
-            <h6 className="mt-2">
-                    {/* {`${jobDetails.date.substr(8, 2)}.${jobDetails.date.substr(
-                      5,
-                      2
-                    )}.${jobDetails.date.substr(0, 4)}`} */}
-            </h6>
+            <h3 className="m  josefin-sans-400 fs-5">Service Date</h3>
+            <h6 className="mt-2  josefin-sans-300">{formattedDate}</h6>
           </Col>
           <Col className="profile-container">
-            <h3 className="m">Length of service</h3>
-            <h6 className="mt-2">
+            <h3 className="m  josefin-sans-400 fs-5">Length of service</h3>
+            <h6 className="mt-2  josefin-sans-300">
               {jobDetails.time_required} hours
             </h6>
           </Col>
           <Col className="profile-container">
-            <h3 className="m">Points Available</h3>
-            <h6 className="mt-2">
-              {jobDetails.points}
-            </h6>
+            <h3 className="m  josefin-sans-400 fs-5">Points Available</h3>
+            <h6 className="mt-2  josefin-sans-300">{jobDetails.points}</h6>
           </Col>
         </Row>
-        </Container>
+        <br />
+        Styling Option 2:
+        <Row className="justify-content-md-center">
+          <Col className=" ">
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Text className="m  josefin-sans-400 fs-5">
+                  <div> Service Description</div>
+                </Card.Text>
+                <Card.Text className="mt-2  josefin-sans-300">
+                  <div> {jobDetails.service_description}</div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col xs={12} md={4}>
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Text className="m  josefin-sans-400 fs-5">
+                  <h3 className="m  josefin-sans-400 fs-5">Service Date</h3>
+                  <h6 className="mt-2  josefin-sans-300">{formattedDate}</h6>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
 
+          <Col xs={12} md={4}>
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Text className="m  josefin-sans-400 fs-5">
+                  <h3 className="m  josefin-sans-400 fs-5">
+                    Length of service
+                  </h3>
+                  <h6 className="mt-2  josefin-sans-300">
+                    {jobDetails.time_required} hours
+                  </h6>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={12} md={4}>
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Text className="m  josefin-sans-400 fs-5">
+                  <h3 className="m  josefin-sans-400 fs-5">Points Available</h3>
+                  <h6 className="mt-2  josefin-sans-300">
+                    {jobDetails.points}
+                  </h6>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
         <Button
-            className="button josefin-sans-400 mt-2" onClick={handleClick} disabled={!assigned ? false : true}>
-              Accept Job
+          className="button josefin-sans-400 mt-2"
+          onClick={handleClick}
+          disabled={
+            jobDetails.assigned_to !== null || creator.id === loggedinUser.id
+              ? true
+              : false
+          }
+        >
+          Accept Job
         </Button>
+        {creator.id === loggedinUser.id ? (
+          <div className="josefin-sans-300 mt-2 mb-4">
+            <strong>You cannot accept your own job assignment!</strong>
+          </div>
+        ) : (
+          ""
+        )}
+      </Container>
     </div>
   );
 }
