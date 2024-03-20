@@ -8,6 +8,7 @@ const Op = Sequelize.Op;
 var serviceMustExist = require("../guards/serviceMustExist");
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 
+// Pusher set up
 const pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
   key: process.env.PUSHER_KEY,
@@ -16,7 +17,7 @@ const pusher = new Pusher({
   useTLS: true,
 });
 
-// POST message - Paga Chat.jsx
+// POST message - Page Chat.jsx
 router.post(
   "/messages/:id",
   serviceMustExist,
@@ -49,6 +50,7 @@ router.post(
   }
 );
 
+// list of messages
 router.get("/messages/:id", userShouldBeLoggedIn, async (req, res) => {
   const { user_id } = req;
   const { id } = req.params;

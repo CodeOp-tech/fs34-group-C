@@ -11,7 +11,7 @@ router.get("/user", userShouldBeLoggedIn, async function (req, res) {
   const { user_id } = req;
   try {
     const response = await models.User.findOne({
-      attributes: ["email", "firstname", "lastname", "total_points"],
+      attributes: ["id", "email", "firstname", "lastname", "total_points"],
       where: { id: user_id },
     });
     res.send(response);

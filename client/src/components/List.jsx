@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { Container, ListGroup } from "react-bootstrap";
 
 export default function List() {
   const [serviceList, setServiceList] = useState([]);
@@ -13,7 +14,6 @@ export default function List() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data.services);
       setServiceList(response.data.services);
     } catch (error) {
       console.log(error);
@@ -26,14 +26,20 @@ export default function List() {
 
   return (
     <div>
-      <div>Your chats</div>
-      {serviceList.map((serviceType) => (
-        <div key={serviceType.id}>
-          <NavLink to={`/chat/${serviceType.id}`} className="fs-4">
-            {serviceType.service_name}
-          </NavLink>
-        </div>
-      ))}
+      <Container>
+        {serviceList.map((serviceType) => (
+          <ListGroup key={serviceType.id} className="josefin-sans-300 fs-5">
+            <ListGroup.Item
+              as={NavLink}
+              to={`/chat/${serviceType.id}`}
+              action
+              variant="light"
+            >
+              {serviceType.service_name}
+            </ListGroup.Item>
+          </ListGroup>
+        ))}
+      </Container>
     </div>
   );
 }
