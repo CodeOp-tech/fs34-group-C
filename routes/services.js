@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 require("dotenv").config();
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const models = require("../models");
+const Op = Sequelize.Op;
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -65,6 +66,7 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
     res.status(500).send(err);
   }
 });
+
 
 // Getting the user id of the user logged in
 router.get("/user", userShouldBeLoggedIn, async function (req, res) {
@@ -130,7 +132,33 @@ router.post(
         },
       });
 
-      //want to also get the points from service and add them to the user points but :(
+      // points system before assigning to user
+      const servicePoints = service.points;
+      const serviceCreatorId = service.service_creator;
+      const updatedUserPoints = user.total_points + servicePoints; // User assigned_to gains points
+
+      const serviceCreator = await models.User.findOne({
+        where: {
+          id: serviceCreatorId,
+        },
+      });
+
+      const updatedServiceCreatorPoints =
+        serviceCreator.total_points - servicePoints; // service_creator loses points
+
+      // Update points in the database
+      await models.User.update(
+        { total_points: updatedUserPoints },
+        {
+          where: { id: user_id },
+        }
+      );
+      await models.User.update(
+        { total_points: updatedServiceCreatorPoints },
+        {
+          where: { id: serviceCreatorId },
+        }
+      );
 
       await service.setAssignedTo(user); //so you need to use the alias that's in the model for service, you were close!
       res.send(service);

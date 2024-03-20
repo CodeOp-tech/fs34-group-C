@@ -4,15 +4,18 @@ import { Container } from "react-bootstrap";
 
 export default function Chatbox() {
   return (
-    <Container>
-      <div className="row h-100 border rounded bg-white shadow">
-        <div className="col-3 px-0 ">
-          <List />
+    <div className="profile pt-5 pb-3">
+      <Container>
+        <div className="josefin-sans-400 fs-1">Chats</div>
+        <div className="row">
+          <div className="col-3">
+            <List />
+          </div>
+          <div className="col-9">
+            <Outlet />
+          </div>
         </div>
-        <div className="col-9 px-0 border-left">
-          <Outlet />
-        </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
