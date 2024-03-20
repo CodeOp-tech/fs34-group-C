@@ -39,7 +39,7 @@ export default function Jobs() {
     console.log(category);
     try {
       const response = await fetch(
-        `/api/index/services?category=${category}&points=${input.points}&time_required=${input.time_required}`,
+        `/api/services/services?category=${category}&points=${input.points}&time_required=${input.time_required}`,
         {
           method: "GET",
           headers: {

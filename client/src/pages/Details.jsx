@@ -6,10 +6,13 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 export default function Details() {
   const [jobDetails, setJobDetails] = useState({});
   const [assigned, setAssigned] = useState(false);
+  const [creator, setCreator] = useState({});
+  const [loggedinUser, setLoggedinUser] = useState({});
+  const [creatorIsUser, setCreatorIsUser] = useState(false);
   const { id } = useParams()
 
   useEffect(() => {
-    getDetails();
+    getDetails(); getCreator(); getLoggedinUser(); isUserCreator();
   }, []);
 
   const getDetails = async () => {
@@ -40,6 +43,45 @@ export default function Details() {
       console.log(err);
     } setAssigned(true);
     console.log(assigned)
+  };
+
+  const getCreator = async () => {
+    try {
+      const response = await fetch(`/api/services/details/${id}/creator`, {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const data = await response.json();
+      setCreator(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getLoggedinUser = async () => {
+    try {
+      const response = await fetch(`/api/services/user`, {
+        method: "GET",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      const data = await response.json();
+
+      setLoggedinUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  function isUserCreator () {
+    console.log(creator.id)
+    console.log(loggedinUser.id)
+    if (creator.id === loggedinUser.id) {
+      setCreatorIsUser(true); 
+    } setCreatorIsUser(false);
   }
 
   function handleClick(event) {
@@ -47,12 +89,13 @@ export default function Details() {
     assignJob()
   };
 
+  console.log(creatorIsUser)
   return (
   <div>
   <div className="welcome-title josefin-sans-400">
   {jobDetails.service_name}
             </div>
-            <p className="josefin-sans-300 mt-4 mb-4">Request made by {jobDetails.service_creator}</p>
+            <p className="josefin-sans-300 mt-4 mb-4">Request made by {creator.firstname} {creator.lastname}</p>
             <p className="josefin-sans-300 mt-4 mb-4"> Assigned Status: {assigned === true ? "Already assigned" : "Job available" }</p>
             <Container>
             <Row>
