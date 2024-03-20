@@ -106,26 +106,26 @@ export default function Details() {
 
               <hr />
             </div>
-            <p className="josefin-sans-300 mt-4">
+            <div className="josefin-sans-300 mt-4">
               <strong>Request made by: </strong>user with id {creator.id} and
               name {creator.firstname} {creator.lastname}
-            </p>
+            </div>
             {jobDetails.assigned_to ? (
-              <p className="josefin-sans-300 ">
+              <div className="josefin-sans-300 ">
                 <strong>The job is assigned to: </strong> user_id{" "}
                 {jobDetails.assigned_to}
-              </p>
+              </div>
             ) : (
-              <p className="josefin-sans-300 ">
+              <div className="josefin-sans-300 ">
                 <strong>Job status: </strong>available
-              </p>
+              </div>
             )}
-            <p className="josefin-sans-300 ">
+            <div className="josefin-sans-300 ">
               <em>
                 <strong>You are:</strong> {loggedinUser.id} /{" "}
                 {loggedinUser.firstname} {loggedinUser.lastname}
               </em>
-            </p>
+            </div>
           </Col>
         </Row>
         Styling Option 1:
@@ -139,18 +139,18 @@ export default function Details() {
         </Row>
         <Row>
           <Col className="profile-container">
-            <h3 className="m  josefin-sans-400 fs-5">Service Date</h3>
-            <h6 className="mt-2  josefin-sans-300">{formattedDate}</h6>
+            <div className="m  josefin-sans-400 fs-5">Service Date</div>
+            <div className="mt-2  josefin-sans-300">{formattedDate}</div>
           </Col>
           <Col className="profile-container">
-            <h3 className="m  josefin-sans-400 fs-5">Length of service</h3>
-            <h6 className="mt-2  josefin-sans-300">
+            <div className="m  josefin-sans-400 fs-5">Length of service</div>
+            <div className="mt-2  josefin-sans-300">
               {jobDetails.time_required} hours
-            </h6>
+            </div>
           </Col>
           <Col className="profile-container">
-            <h3 className="m  josefin-sans-400 fs-5">Points Available</h3>
-            <h6 className="mt-2  josefin-sans-300">{jobDetails.points}</h6>
+            <div className="m  josefin-sans-400 fs-5">Points Available</div>
+            <div className="mt-2  josefin-sans-300">{jobDetails.points}</div>
           </Col>
         </Row>
         <br />
@@ -174,8 +174,8 @@ export default function Details() {
             <Card className="mb-4">
               <Card.Body>
                 <Card.Text className="m  josefin-sans-400 fs-5">
-                  <h3 className="m  josefin-sans-400 fs-5">Service Date</h3>
-                  <h6 className="mt-2  josefin-sans-300">{formattedDate}</h6>
+                  <div className="m  josefin-sans-400 fs-5">Service Date</div>
+                  <div className="mt-2  josefin-sans-300">{formattedDate}</div>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -185,12 +185,12 @@ export default function Details() {
             <Card className="mb-4">
               <Card.Body>
                 <Card.Text className="m  josefin-sans-400 fs-5">
-                  <h3 className="m  josefin-sans-400 fs-5">
+                  <div className="m  josefin-sans-400 fs-5">
                     Length of service
-                  </h3>
-                  <h6 className="mt-2  josefin-sans-300">
+                  </div>
+                  <div className="mt-2  josefin-sans-300">
                     {jobDetails.time_required} hours
-                  </h6>
+                  </div>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -199,10 +199,12 @@ export default function Details() {
             <Card className="mb-4">
               <Card.Body>
                 <Card.Text className="m  josefin-sans-400 fs-5">
-                  <h3 className="m  josefin-sans-400 fs-5">Points Available</h3>
-                  <h6 className="mt-2  josefin-sans-300">
+                  <div className="m  josefin-sans-400 fs-5">
+                    Points Available
+                  </div>
+                  <div className="mt-2  josefin-sans-300">
                     {jobDetails.points}
-                  </h6>
+                  </div>
                 </Card.Text>
               </Card.Body>
             </Card>
