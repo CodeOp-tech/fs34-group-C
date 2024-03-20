@@ -8,14 +8,19 @@ export default function Details() {
   const [loggedinUser, setLoggedinUser] = useState({});
   const [creator, setCreator] = useState({});
   const { id } = useParams();
-  const formattedDate = jobDetails.date;
-  // `${jobDetails.date.substr(
-  //   8,
-  //   2
-  // )}.${jobDetails.date.substr(5, 2)}.${jobDetails.date.substr(0, 4)}`;
 
-  // const [assigned, setAssigned] = useState(false);
-  // const [creatorIsUser, setCreatorIsUser] = useState(false);
+  // Formatting my date:
+  function formatDate(date) {
+    let month = date.getMonth();
+    if (month.toString().length < 2) month = "0" + month;
+
+    const year = date.getFullYear();
+    const dateString = `${date.getDate()}.${month}.${year}`;
+    return dateString;
+  }
+  const date = new Date();
+  const formattedDate = formatDate(date);
+  console.log(formattedDate);
 
   useEffect(() => {
     getDetails();
@@ -107,10 +112,18 @@ export default function Details() {
               <hr />
             </div>
             <div className="josefin-sans-300 mt-4">
-              <strong>Request made by: </strong>user with id {creator.id} and
-              name {creator.firstname} {creator.lastname}
+              <strong>Request made by: </strong>
+              {creator.firstname && creator.lastname ? (
+                <div>
+                  {creator.firstname} {creator.lastname}{" "}
+                </div>
+              ) : (
+                <div>
+                  <em>Unknown user</em>
+                </div>
+              )}
             </div>
-            {jobDetails.assigned_to ? (
+            {/* {jobDetails.assigned_to ? (
               <div className="josefin-sans-300 ">
                 <strong>The job is assigned to: </strong> user_id{" "}
                 {jobDetails.assigned_to}
@@ -119,13 +132,13 @@ export default function Details() {
               <div className="josefin-sans-300 ">
                 <strong>Job status: </strong>available
               </div>
-            )}
-            <div className="josefin-sans-300 ">
+            )} */}
+            {/* <div className="josefin-sans-300 ">
               <em>
                 <strong>You are:</strong> {loggedinUser.id} /{" "}
                 {loggedinUser.firstname} {loggedinUser.lastname}
               </em>
-            </div>
+            </div> */}
           </Col>
         </Row>
         Styling Option 1:
@@ -221,9 +234,16 @@ export default function Details() {
         >
           Accept Job
         </Button>
-        {creator.id === loggedinUser.id ? (
+        {jobDetails.assigned_to === loggedinUser.id ? (
           <div className="josefin-sans-300 mt-2 mb-4">
             <strong>You cannot accept your own job assignment!</strong>
+          </div>
+        ) : (
+          ""
+        )}
+        {jobDetails.assigned_to !== null ? (
+          <div className="josefin-sans-300 mt-2 mb-4">
+            <strong>This job has already been assigned to someone else!</strong>
           </div>
         ) : (
           ""

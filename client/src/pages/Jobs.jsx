@@ -30,6 +30,7 @@ export default function Jobs() {
 
   useEffect(() => {
     getJobsByCategory();
+    // getDetails();
   }, [input]);
 
   // get All Jobs listed under a certain Category Id (which is given to me by usesearchParams)
@@ -203,30 +204,44 @@ export default function Jobs() {
               <Col className="josefin-sans-300 col-3" key={service.id}>
                 <Card className="mb-4">
                   <Card.Body>
-                    <Card.Title>{service.service_name}</Card.Title>
-                    <Card.Text>
-                      <strong>Date of fulfillment:</strong>
-                      {` ${service.date.substr(8, 2)}.${service.date.substr(
-                        5,
-                        2
-                      )}.${service.date.substr(0, 4)}`}
-                    </Card.Text>
-                    <Card.Text>
-                      <strong> Duration:</strong> {service.time_required} hours
-                    </Card.Text>
-                    <Card.Text>
-                      <strong>Points to earn: </strong>
-                      {service.points}
-                    </Card.Text>
-                    <Card.Text className="overflow">
-                      <strong>Description: </strong>{" "}
-                      <em> {service.service_description}</em>
-                    </Card.Text>
-                    <Link to={`/jobs/${service.id}`}>
-                      <Button className="button josefin-sans-400 mt-2">
-                        Details
-                      </Button>
-                    </Link>
+                    <Row>
+                      <Col xs={11} md={10}>
+                        <Card.Title>{service.service_name}</Card.Title>
+                      </Col>
+                      <Col xs={11} md={1}>
+                        {service.assigned_to !== null ? (
+                          <div className="status-assigned-button"> </div>
+                        ) : (
+                          <div className="status-free-button"> </div>
+                        )}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Card.Text>
+                        <strong>Date of fulfillment:</strong>
+                        {` ${service.date.substr(8, 2)}.${service.date.substr(
+                          5,
+                          2
+                        )}.${service.date.substr(0, 4)}`}
+                      </Card.Text>
+                      <Card.Text>
+                        <strong> Duration:</strong> {service.time_required}{" "}
+                        hours
+                      </Card.Text>
+                      <Card.Text>
+                        <strong>Points to earn: </strong>
+                        {service.points}
+                      </Card.Text>
+                      <Card.Text className="overflow">
+                        <strong>Description: </strong>{" "}
+                        <em> {service.service_description}</em>
+                      </Card.Text>
+                      <Link to={`/jobs/${service.id}`}>
+                        <Button className="button josefin-sans-400 mt-2">
+                          Details
+                        </Button>
+                      </Link>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
