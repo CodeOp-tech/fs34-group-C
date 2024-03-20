@@ -4,6 +4,7 @@ const Sequelize = require("sequelize");
 require("dotenv").config();
 var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const models = require("../models");
+const Op = Sequelize.Op;
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -37,7 +38,6 @@ router.post("/services", userShouldBeLoggedIn, async function (req, res) {
     res.status(500).send(error);
   }
 });
-
 
 // // Jana GET all categorie names
 // router.get("/categories", userShouldBeLoggedIn, async function (req, res) {
@@ -84,15 +84,15 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
 // router.get("/details/:id/creator", userShouldBeLoggedIn, async function (req, res) {
 //   try {
 //    //i have the service in the req params
-//     //i want the creator of this service 
+//     //i want the creator of this service
 //     //find the service
 //    const { id } = req.params;
 //    const service = await models.Service.findOne({
-//      where: { id: id 
+//      where: { id: id
 //     },
 //    });
 
-//   // const user = await models.User.findOne({ 
+//   // const user = await models.User.findOne({
 //   //   where: { id: service.creator
 //   //   }
 //   // })
@@ -106,32 +106,62 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
 //   }
 // });
 
-//create 'assigned-to' assocation when user accepts a job 
-router.post("/details/:service_id/assigned", userShouldBeLoggedIn, async function (req, res){
-    const { service_id } = req.params; 
+//create 'assigned-to' assocation when user accepts a job
+router.post(
+  "/details/:service_id/assigned",
+  userShouldBeLoggedIn,
+  async function (req, res) {
+    const { service_id } = req.params;
     const { user_id } = req;
     try {
-    const user = await models.User.findOne({
-      where: {
-        id: user_id
-      },
-    });
-  
-  const service = await models.Service.findOne({
-    where: {
-      id: service_id,
-    },
-  });
+      const user = await models.User.findOne({
+        where: {
+          id: user_id,
+        },
+      });
 
-  //want to also get the points from service and add them to the user points but :(
+      const service = await models.Service.findOne({
+        where: {
+          id: service_id,
+        },
+      });
 
-    await service.setAssignedTo(user); //so you need to use the alias that's in the model for service, you were close!
-    res.send(service);
-  } catch (error) {
-    res.status(500).send(error);
+      // points system before assigning to user
+      const servicePoints = service.points;
+      const serviceCreatorId = service.service_creator;
+      const updatedUserPoints = user.total_points + servicePoints; // User assigned_to gains points
+
+      const serviceCreator = await models.User.findOne({
+        where: {
+          id: serviceCreatorId,
+        },
+      });
+
+      const updatedServiceCreatorPoints =
+        serviceCreator.total_points - servicePoints; // service_creator loses points
+
+      // Update points in the database
+      await models.User.update(
+        { total_points: updatedUserPoints },
+        {
+          where: { id: user_id },
+        }
+      );
+
+      await models.User.update(
+        { total_points: updatedServiceCreatorPoints },
+        {
+          where: { id: serviceCreatorId },
+        }
+      );
+
+      await service.setAssignedTo(user); //so you need to use the alias that's in the model for service, you were close!
+      res.send(service);
+    } catch (error) {
+      res.status(500).send(error);
+    }
   }
-  
-  });
+);
 
 // Ari GET categories, select * from categories
 router.get("/types", async function (req, res, next) {
@@ -142,7 +172,5 @@ router.get("/types", async function (req, res, next) {
     res.status(500).send(error);
   }
 });
-
-
 
 module.exports = router;
