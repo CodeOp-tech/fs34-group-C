@@ -45,7 +45,7 @@ router.get("/services", userShouldBeLoggedIn, async function (req, res) {
     const response = await models.Service.findAll({
       where: { CategoryId: category },
     });
-    console.log(response);
+
     res.send(response);
   } catch (err) {
     res.status(500).send(err);
@@ -59,38 +59,54 @@ router.get("/details/:id", userShouldBeLoggedIn, async function (req, res) {
     const response = await models.Service.findOne({
       where: { id: id },
     });
-    console.log(response);
+ 
     res.send(response);
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
+// Getting the user id of the user logged in
+router.get("/user", userShouldBeLoggedIn, async function (req, res) {
+const { user_id } = req;
+try {
+  const response = await models.User.findOne({
+    attributes: ["id", "email", "firstname", "lastname", "total_points"],
+    where: { id: user_id },
+  });
+  console.log(response);
+  res.send(response);
+} catch (error) {
+  res.status(500).send(error);
+}
+});
+
 //getting the creator of a service (not going well) (Alys)
-// router.get("/details/:id/creator", userShouldBeLoggedIn, async function (req, res) {
-//   try {
-//    //i have the service in the req params
-//     //i want the creator of this service
-//     //find the service
-//    const { id } = req.params;
-//    const service = await models.Service.findOne({
-//      where: { id: id
-//     },
-//    });
 
-//   // const user = await models.User.findOne({
-//   //   where: { id: service.creator
-//   //   }
-//   // })
+router.get("/details/:service_id/creator", userShouldBeLoggedIn, async function (req, res) {
+  try {
+   //i have the service in the req params
+    //i want the creator of this service 
+    //find the service
+   const { service_id } = req.params;
+   const service = await models.Service.findOne({
+     where: { 
+      id: service_id
+    },
+   });
 
-//   // const user = await service.getCreator();
+  const user = await models.User.findOne({ 
+    where: { id: service.service_creator
+    },
+  })
 
-//     console.log(response);
-//     res.send(service);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
+  // const user = await service.getCreator();
+
+    res.send(user);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 //create 'assigned-to' assocation when user accepts a job
 router.post(
