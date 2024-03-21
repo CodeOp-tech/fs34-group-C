@@ -208,7 +208,7 @@ export default function Details() {
         >
           Accept Job
         </Button>
-        {jobDetails.assigned_to === loggedinUser.id ? (
+        {creator.id === loggedinUser.id ? (
           <div className="josefin-sans-300 mt-2 mb-4">
             <strong>You cannot accept your own job assignment!</strong>
           </div>
