@@ -52,8 +52,9 @@ export default function About() {
               <ul>
                 <li>Upon registration, each user receives 100 points. </li>
                 <li>
-                  When posting a job request, 10 points are taken off your
-                  account.
+                  When posting a job request, 10 points per hour are taken off
+                  your account.
+
                 </li>
                 <li>
                   When accepting and fulfilling someone elses' job request, you
