@@ -1,6 +1,7 @@
 body {
   background-color: #f8f9fa;
 }
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -9,88 +10,16 @@ body {
   background-color: #fff5cb;
 }
 
-.footer {
-  background: #f8f9fa;
-  margin: 0px;
-  position: static;
-  bottom: 0px;
-  width: 100%;
-}
-
-.button {
-  background-color: #e2edf1;
-  color: rgb(97, 96, 96);
-  border-radius: 20px;
-  padding: 9px 30px;
-  border: 1.9px solid rgb(97, 96, 96);
-}
-
-.filter-button {
-  background-color: white;
-  color: rgb(97, 96, 96);
-  border-radius: 20px;
-  padding: 6px 20px;
-  border: 1.9px solid rgb(97, 96, 96);
-}
-
-.filter-button:hover {
-  background-color: #e2edf1;
-  color: rgb(97, 96, 96);
-  border-radius: 20px;
-  padding: 6px 20px;
-  border: 1.9px solid rgb(97, 96, 96);
-}
-
-.welcome-title {
-  font-size: 100px;
-  line-height: 80px;
-}
-.request-title {
-  font-size: 100px;
-  line-height: auto;
-}
-.img {
-  border-radius: 10%;
-  padding: 0px;
-  margin-left: 10px;
-  width: 400px;
-}
-.sacramento-regular {
-  font-family: "Sacramento", cursive;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.josefin-sans-400 {
-  font-family: "Josefin Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.josefin-sans-300 {
-  font-family: "Josefin Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.job-box {
-  border-radius: 20px;
-  border: 2px solid rgb(115, 113, 113);
-  padding: 20px;
-  justify-content: center;
-}
-
-.icon {
-  height: 200px;
-}
-
+/* Profile Page */
 .profile {
   background-color: rgb(226, 242, 243);
-  margin: 0;
+  margin: 0px;
   min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-height: 100vh;
+  /* height: 100%; */
 }
 .profile-container {
   color: rgb(0, 62, 69);
@@ -117,31 +46,29 @@ body {
   color: rgb(0, 62, 69);
 }
 
-/* .image-container {
-  background-color: rgb(1, 37, 63);
+/* Buttons */
+.button {
+  background-color: #e2edf1;
+  color: rgb(97, 96, 96);
   border-radius: 20px;
-  max-height: 30px;
-  width: 100%;
-  max-width: 30px;
-  margin: 0 auto;
-  padding: 50px 50px;
-  border: 1.9px solid rgb(1, 58, 100);
-  justify-content: center;
-  display: flex;
-} */
-
-.profile-img {
-  max-width: 100px;
-  background-color: white;
-  border-radius: 50%;
-  border: 1.9px solid rgb(1, 58, 100);
-  padding: 5px;
+  padding: 9px 30px;
+  border: 1.9px solid rgb(97, 96, 96);
 }
-.overflow {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+
+.filter-button {
+  background-color: white;
+  color: rgb(97, 96, 96);
+  border-radius: 20px;
+  padding: 6px 20px;
+  border: 1.9px solid rgb(97, 96, 96);
+}
+
+.filter-button:hover {
+  background-color: #e2edf1;
+  color: rgb(97, 96, 96);
+  border-radius: 20px;
+  padding: 6px 20px;
+  border: 1.9px solid rgb(97, 96, 96);
 }
 
 .status-assigned-button {
@@ -156,4 +83,91 @@ body {
   height: 10px;
   border-radius: 50%;
   background-color: green;
+}
+
+/* Images */
+.img {
+  border-radius: 10%;
+  padding: 0px;
+  margin-left: 10px;
+  width: 400px;
+}
+
+.icon {
+  height: 200px;
+}
+
+.profile-img {
+  max-width: 100px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1.9px solid rgb(1, 58, 100);
+  padding: 5px;
+}
+
+/* .image-container {
+  background-color: rgb(1, 37, 63);
+  border-radius: 20px;
+  max-height: 30px;
+  width: 100%;
+  max-width: 30px;
+  margin: 0 auto;
+  padding: 50px 50px;
+  border: 1.9px solid rgb(1, 58, 100);
+  justify-content: center;
+  display: flex;
+} */
+
+/* Titles and Fonts */
+.welcome-title {
+  font-size: 100px;
+  line-height: 80px;
+}
+.request-title {
+  font-size: 100px;
+  line-height: auto;
+}
+
+.sacramento-regular {
+  font-family: "Sacramento", cursive;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.josefin-sans-400 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.josefin-sans-300 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Boxes */
+.job-box {
+  border-radius: 20px;
+  border: 2px solid rgb(115, 113, 113);
+  padding: 20px;
+  justify-content: center;
+}
+
+.overflow {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Footer */
+.footer {
+  background: #f8f9fa;
+  margin: 0px;
+  position: static;
+  bottom: 0px;
+  width: 100%;
 }
