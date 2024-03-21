@@ -1,6 +1,6 @@
 # TimeShare
 
-TimeShare is a social and community-based platform designed to facilitate the exchange of services among its users. TimeShare is not just about matching demand and supply; it's about fostering a sense of connection and support within our community. This full-stack application was developed by three students - Alys Reed, Jana Burri, Arianne Napa- as part of a group project at CodeOp Barcelona.
+TimeShare is a social and community-based platform designed to facilitate the exchange of services among its users. TimeShare is not just about matching demand and supply; it's about fostering a sense of connection and support within our community. This application was developed by three students - Alys Reed, Jana Burri, Arianne Napa- as part of a group project at [CodeOp](https://codeop.tech/), a full stack development bootcamp in Barcelona.
 
 ## Built With
 
@@ -23,20 +23,20 @@ TimeShare is a social and community-based platform designed to facilitate the ex
 
 ### Dependencies
 
-Run `npm install` in the project folder to install dependencies related to Express (the server). Check if the following dependencies are installed, otherwise install with the commands in the parenthesis:
+Run `npm install` in the project folder to install dependencies related to Express (the server). Check if the following dependencies are installed, otherwise install with the commands:
 
-- Express.js (`npm install express`)
-- Nodemon (`nnpm install -g nodemon`)
-- Sequelize (`npm install sequelize mysql2`)
-- Pusher (`npm install pusher`)
-- JSON Web Tokens (`npm install jsonwebtoken`)
+- Express.js `npm install express`
+- Nodemon `nnpm install -g nodemon`
+- Sequelize `npm install sequelize mysql2`
+- Pusher `npm install pusher`
+- JSON Web Tokens `npm install jsonwebtoken`
 
 Type `cd client` in the terminal and run `npm install` to install dependencies related to React (the client). Check if the following is installed:
 
-- React Router (`npm install react-router-dom`)
-- React-Bootstrap (`npm install react-bootstrap bootstrap`)
-- Axios (`npm install axios`)
-- Pusher-js (`npm install pusher-js`)
+- React Router `npm install react-router-dom`
+- React-Bootstrap `npm install react-bootstrap bootstrap`
+- Axios `npm install axios`
+- Pusher-js `npm install pusher-js`
 
 ### Database Prep
 
@@ -64,7 +64,7 @@ Run `npx sequelize-cli db:seed:all` to insert the necessary data into the tables
 ### Development
 
 - Run `npm start` in project directory to start the Express server on port 3000
-- Type`cd client` in a new terminal and run `npm run dev` to start the client server in development mode with hot reloading in port 5173.
+- Type `cd client` in a new terminal and run `npm run dev` to start the client server in development mode with hot reloading in port 5173.
 
 ### Pusher
 
