@@ -54,6 +54,7 @@ export default function About() {
                 <li>
                   When posting a job request, 10 points per hour are taken off
                   your account.
+
                 </li>
                 <li>
                   When accepting and fulfilling someone elses' job request, you
