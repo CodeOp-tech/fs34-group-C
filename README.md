@@ -40,7 +40,7 @@ Type `cd client` in the terminal and run `npm install` to install dependencies r
 
 ### Database Prep
 
-[database](dbschema.png)
+![database](dbschema.png)
 
 Create `.env` file in project directory and add
 
