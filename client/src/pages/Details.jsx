@@ -7,6 +7,7 @@ export default function Details() {
   const [jobDetails, setJobDetails] = useState({});
   const [loggedinUser, setLoggedinUser] = useState({});
   const [creator, setCreator] = useState({});
+  const [assigned, setAssigned] = useState(false);
   const { id } = useParams();
 
   // Formatting my date:
@@ -99,6 +100,7 @@ export default function Details() {
   function handleClick(event) {
     event.preventDefault();
     assignJob();
+    setAssigned(true);
   }
 
   return (
@@ -114,25 +116,26 @@ export default function Details() {
             <div className="josefin-sans-300 mt-4">
               <strong>Request made by: </strong>
               {creator.firstname && creator.lastname ? (
-                <div>
+                <span>
                   {creator.firstname} {creator.lastname}{" "}
-                </div>
+                </span>
               ) : (
-                <div>
+                <span>
                   <em>Unknown user</em>
-                </div>
+                </span>
               )}
             </div>
-            {/* {jobDetails.assigned_to ? (
-              <div className="josefin-sans-300 ">
-                <strong>The job is assigned to: </strong> user_id{" "}
-                {jobDetails.assigned_to}
-              </div>
+            {jobDetails.assigned_to ? (
+              <span className="josefin-sans-300 mt-4">
+                <strong>Job status: </strong>
+                already assigned
+              </span>
             ) : (
-              <div className="josefin-sans-300 ">
-                <strong>Job status: </strong>available
-              </div>
-            )} */}
+              <span className="josefin-sans-300 ">
+                <strong>Job status: </strong>
+                available
+              </span>
+            )}
             {/* <div className="josefin-sans-300 ">
               <em>
                 <strong>You are:</strong> {loggedinUser.id} /{" "}
@@ -141,7 +144,7 @@ export default function Details() {
             </div> */}
           </Col>
         </Row>
-  
+
         <Row className="justify-content-md-center">
           <Col className=" ">
             <Card className="mb-4">
@@ -208,15 +211,16 @@ export default function Details() {
         >
           Accept Job
         </Button>
-        {jobDetails.assigned_to === loggedinUser.id ? (
+
+        {jobDetails.assigned_to === null &&
+        jobDetails.service_creator === loggedinUser.id ? (
           <div className="josefin-sans-300 mt-2 mb-4">
             <strong>You cannot accept your own job assignment!</strong>
           </div>
         ) : (
           ""
         )}
-
-          {jobDetails.assigned_to === loggedinUser.id ? (
+        {assigned === true ? (
           <div className="josefin-sans-300 mt-2 mb-4">
             <strong>You've been assigned this job!</strong>
           </div>

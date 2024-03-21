@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Container, Button, Row, Col, Image } from "react-bootstrap";
+import { Container, Button, Row, Col, Card, Image } from "react-bootstrap";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({
@@ -57,18 +57,19 @@ export default function Profile() {
   //ensuring we see something when we click on the page
 
   useEffect(() => {
-    getUserInfo(); getUserServices(); getUserJobs();
+    getUserInfo();
+    getUserServices();
+    getUserJobs();
   }, []);
 
   //button functions
   const navigate = useNavigate();
   const handleRequestClick = () => navigate("/Request");
   const handleJobsClick = () => navigate("/Categories");
-  const handleRewardsClick = () =>  alert("Coming Soon!");
+  const handleRewardsClick = () => alert("Coming Soon!");
 
   return (
-
-    <div className="profile pt-5 pb-3">
+    <div className="profile pt-5 pb-3 josefin-sans-300">
       <Container>
         <Row className="m-5 justify-content-md-center">
           <Col xs={12} md={6}>
@@ -77,10 +78,13 @@ export default function Profile() {
           </Col>
         </Row>
         <Row className="text-center">
-
           <Col className="profile-container">
             <h3 className="m">Profile information</h3>
-            <div className="image-container rounded-circle"></div>
+            {/* <div className="image-container rounded-circle"></div> */}
+            <img
+              className="profile-img"
+              src="https://i.pinimg.com/originals/8e/f3/17/8ef31747358bc98e361f8206e5b293ea.png"
+            ></img>
             <h5 className="mt-2">
               {userInfo.firstname} {userInfo.lastname}
             </h5>
@@ -89,17 +93,30 @@ export default function Profile() {
             <Button className="profile-button m-2">Update Information</Button>
           </Col>
         </Row>
+
         <Row className="text-center">
           <Col className="profile-container">
             <h3>My Service Requests</h3>
-            <p>Upcoming service requests</p>
-            {userServices.map((userService, i) => (
-               <Link to={`/jobs/${userService.id}`}>
-              <h5 className="mt-2" key={i}>
-                {userService.service_name}
-              </h5>
-               </Link>
-            ))}
+
+            <div> Upcoming service requests</div>
+            <Row className="justify-content-md-center">
+              {userServices.map((userService, i) => (
+                <Col className="sm-3 p-0">
+                  <Card xs={3} className="job-container">
+                    <Card.Body>
+                      <Card.Text className=""></Card.Text>
+                      <Card.Text className="">
+                        <div className="" key={i}>
+                          {userService.service_name}
+                        </div>
+
+                        <Link to={`/jobs/${userService.id}`}>See request</Link>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
 
             <Button className="profile-button m-2" onClick={handleRequestClick}>
               Create New Request
@@ -108,15 +125,24 @@ export default function Profile() {
 
           <Col className="profile-container">
             <h3>My Assigned Services</h3>
-            <p>Upcoming jobs</p>
-  
-            {userJobs.map((userJob, i) => (
-               <Link to={`/jobs/${userJob.id}`}>
-              <h5 className="mt-2" key={i}>
-                {userJob.service_name}
-              </h5>
-              </Link>
-            ))}
+            <div>Upcoming jobs</div>
+            <Row className="justify-content-md-center">
+              {userJobs.map((userJob, i) => (
+                <Col className="sm-3 p-0">
+                  <Card xs={3} className="job-container">
+                    <Card.Body className="">
+                      <Card.Text className=""></Card.Text>
+                      <Card.Text className="">
+                        <div className="" key={i}>
+                          {userJob.service_name}
+                        </div>
+                        <Link to={`/jobs/${userJob.id}`}>See job</Link>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
             <Button className="profile-button m-2" onClick={handleJobsClick}>
               View Job Marketplace
             </Button>
@@ -127,7 +153,9 @@ export default function Profile() {
             <h3>Points</h3>
             <p>Here is your current point score:</p>
             <h4>{userInfo.total_points}</h4>
-            <Button className="profile-button m-2" onClick={handleRewardsClick}>Get Rewards</Button>
+            <Button className="profile-button m-2" onClick={handleRewardsClick}>
+              Get Rewards
+            </Button>
           </Col>
         </Row>
       </Container>

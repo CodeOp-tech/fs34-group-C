@@ -99,6 +99,11 @@ body {
   padding: 16px;
   margin: 15px;
 }
+.job-container {
+  width: 200px;
+  height: 100px;
+  margin: 10px auto;
+}
 
 .profile-button {
   background-color: rgb(217, 240, 247);
@@ -112,7 +117,7 @@ body {
   color: rgb(0, 62, 69);
 }
 
-.image-container {
+/* .image-container {
   background-color: rgb(1, 37, 63);
   border-radius: 20px;
   max-height: 30px;
@@ -123,8 +128,15 @@ body {
   border: 1.9px solid rgb(1, 58, 100);
   justify-content: center;
   display: flex;
-}
+} */
 
+.profile-img {
+  max-width: 100px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1.9px solid rgb(1, 58, 100);
+  padding: 5px;
+}
 .overflow {
   display: block;
   overflow: hidden;
