@@ -50,7 +50,7 @@ router.post(
   }
 );
 
-// list of messages
+// list of messages between 2 users up to 10 messages
 router.get("/messages/:id", userShouldBeLoggedIn, async (req, res) => {
   const { user_id } = req;
   const { id } = req.params;
