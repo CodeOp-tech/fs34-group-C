@@ -34,8 +34,6 @@ export default function Request() {
   const [categories, setCategories] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
-  // const navigate = useNavigate();
-
   useEffect(() => {
     getCategories();
   }, []);
