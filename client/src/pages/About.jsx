@@ -52,7 +52,7 @@ export default function About() {
               <ul>
                 <li>Upon registration, each user receives 100 points. </li>
                 <li>
-                  When postid a job request, 10 points are taken off your
+                  When posting a job request, 10 points are taken off your
                   account.
                 </li>
                 <li>
