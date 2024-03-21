@@ -35,7 +35,7 @@ export default function Register() {
   };
 
   return (
-    <div className="profile pt-5 pb-3">
+    <div className="profile pt-5 pb-3 ">
       <Container>
         <Row className="m-5 justify-content-md-center">
           <Col xs={12} md={6}>

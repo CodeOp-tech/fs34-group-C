@@ -34,7 +34,8 @@ module.exports = {
         },
         {
           category_name: "Pets",
-          category_description: "Pet sitting, going for walks etc.",
+          category_description:
+            "Pet sitting, going for walks, taking care of animals etc.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
