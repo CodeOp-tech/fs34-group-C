@@ -2,6 +2,8 @@
 
 TimeShare is a social and community-based platform designed to facilitate the exchange of services among its users. TimeShare is not just about matching demand and supply; it's about fostering a sense of connection and support within our community. This application was developed by three students - Alys Reed, Jana Burri, Arianne Napa- as part of a group project at [CodeOp](https://codeop.tech/), a full stack development bootcamp in Barcelona.
 
+![categories](categories.png)
+
 ## Built With
 
 - React (^18.2.0)
